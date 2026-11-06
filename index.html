@@ -1,0 +1,1928 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+<meta name="theme-color" content="#1a2c63" />
+<title>오늘도 당근해요, 유타! · 대화형 시뮬레이터</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;color:#202124;background:#0c1224;-webkit-font-smoothing:antialiased;--orange:#ff6f0f;--orange-soft:#fff1e6;--line:#ececef;--fg:#202124;--muted:#92979f}*{box-sizing:border-box}html,body{margin:0;min-height:100%;overflow:hidden}button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible,input:focus-visible{outline:2px solid #457aff;outline-offset:2px}button:disabled{cursor:default;opacity:.47}img{display:block;object-fit:cover}p{margin:0}.page-frame{width:100%;height:100dvh;display:flex;justify-content:center;align-items:center;background:radial-gradient(ellipse at 48% 28%,#354a79 0%,#151c35 38%,#070b17 85%);padding:16px}.device{position:relative;width:390px;height:min(844px,calc(100dvh - 28px));flex:0 0 auto;overflow:hidden;border-radius:44px;background:#fff;box-shadow:0 28px 90px #02040d99,0 0 0 4px #26304d,0 0 0 7px #11182a}.screen{position:absolute;inset:0;background:#fff;overflow:hidden}.status-bar{z-index:80;position:absolute;left:0;right:0;top:0;height:48px;color:#1a1d26;pointer-events:none}.status-bar.dark{color:#fff}.status-time{position:absolute;top:16px;left:28px;font-size:14px;letter-spacing:-.4px;font-weight:800}.dynamic-island{position:absolute;top:10px;left:50%;transform:translateX(-50%);height:29px;width:120px;background:#07080b;border-radius:22px}.status-signals{position:absolute;right:25px;top:14px;display:flex;gap:5px;align-items:center;font-size:11px;font-weight:750}.status-signals .battery{border-radius:5px;padding:1px 4px;background:#eaf8d6;color:#25321d;font-size:10px}.home-indicator{position:absolute;z-index:78;bottom:9px;left:50%;transform:translateX(-50%);height:5px;width:112px;border:0;border-radius:5px;background:#20232a;opacity:.88;padding:0}.home-indicator.light{background:#fff}.toast{z-index:140;position:absolute;bottom:55px;left:50%;max-width:calc(100% - 36px);width:max-content;transform:translate(-50%,20px);background:#252931;color:#fff;padding:12px 18px;border-radius:17px;opacity:0;pointer-events:none;font-size:12px;line-height:1.6;text-align:center;box-shadow:0 9px 25px #0002;transition:transform .25s,opacity .25s}.toast.show{opacity:1;transform:translate(-50%,0)}.ios-wallpaper{height:100%;background:radial-gradient(ellipse at 96% -6%,#71b5f6ab,transparent 48%),linear-gradient(145deg,#508dd5 1%,#315da4 35%,#192959 73%,#1b1749 100%);color:#fff}.lock-content{text-align:center;padding-top:98px}.lock-label{font-size:17px;font-weight:500}.lock-clock{font-size:82px;line-height:1.18;font-weight:250;letter-spacing:-6px}.lock-note{position:absolute;top:50%;left:15px;right:15px;border:0;border-radius:19px;padding:14px;background:#d9e6ff9c;backdrop-filter:blur(18px);display:flex;align-items:flex-start;text-align:left;color:#122744;gap:10px;box-shadow:0 10px 32px #07172d25}.lock-noticon{width:40px;height:40px;border-radius:12px;background:#ffe100;display:grid;place-items:center;font-size:25px;flex:0 0 40px}.lock-note b{display:block;font-size:13px;margin-bottom:5px}.lock-note small{font-size:12px;line-height:1.5;display:block}.lock-footer{position:absolute;bottom:59px;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:15px;font-size:12px;letter-spacing:.1px}.lock-unlock{padding:10px 23px;background:#ffffff2e;border:1px solid #ffffff6a;border-radius:25px;color:#fff;font-size:13px}.home-screen{position:relative}.ios-home-widgets{position:absolute;left:5%;right:5%;top:8%;display:grid;grid-template-columns:1fr 1fr;gap:12px}.home-widget{min-height:170px;border-radius:24px;padding:16px 15px;color:#10131a;background:#fafafb;box-shadow:0 4px 25px #0000000e}.home-widget small{display:block;color:#f25e57;font-size:12px;margin-bottom:10px}.home-widget .day{font-size:63px;font-weight:700;letter-spacing:-3px;line-height:1}.home-widget .muted{font-size:11px;color:#6b7480;margin-top:13px}.weather-widget{color:#fff;background:linear-gradient(145deg,#248ade,#65a1e5)}.weather-widget small{color:#fff}.weather-widget .cloud{font-size:43px;text-align:right}.weather-widget .dash{font-size:34px}.weather-widget .muted{color:#e1eafa}.app-grid{position:absolute;left:6%;right:6%;top:36%;display:grid;grid-template-columns:repeat(4,1fr);column-gap:15px;row-gap:19px}.app-tile{border:0;background:none;color:white;display:flex;flex-direction:column;align-items:center;gap:6px;padding:0;min-width:0}.app-tile span:last-child{font-size:11px;text-shadow:0 1px 3px #0007;white-space:nowrap}.app-icon{width:58px;height:58px;border-radius:16px;background:#fff;display:grid;place-items:center;box-shadow:0 5px 11px #0003;font-size:34px;color:#101010;position:relative;overflow:hidden}.app-icon.kakao{background:#ffe500;color:#3a2d10}.app-icon.carrot{background:#ff7800;color:#fff}.app-icon.phone{background:#31cb61;color:#fff}.app-icon.photos{background:#fff;color:#222}.app-icon.messages{background:#3bd874;color:#fff}.app-icon.calendar{background:#fff;color:#161b24}.app-icon.notes{background:#f4f2e8;color:#333}.app-icon.clock{background:#171d2a;color:#fff}.app-icon.settings{background:#d1d5e0}.app-icon .notif{position:absolute;top:0;right:0;font-style:normal;font-size:11px;padding:2px 6px;background:#f1464d;color:#fff;border-radius:20px}.ios-pages{position:absolute;bottom:18%;left:0;right:0;text-align:center;font-size:17px;letter-spacing:3px;color:#ffffffd0}.ios-search{position:absolute;bottom:14%;left:50%;transform:translateX(-50%);font-size:11px;border-radius:14px;padding:5px 13px;background:#ffffff35}.ios-dock{position:absolute;left:3.1%;right:3.1%;bottom:2.6%;height:91px;border-radius:34px;background:#c2cce063;border:1px solid #ffffff7a;display:flex;align-items:center;justify-content:space-around;backdrop-filter:blur(15px)}.ios-dock .app-tile{gap:0}.ios-dock .app-icon{width:60px;height:60px}.kakao-screen{height:100%;display:flex;flex-direction:column;padding-top:49px;padding-bottom:28px;background:#b3c4d4;color:#26313c}.kk-top{height:61px;flex:0 0 61px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;color:#111820}.kk-top-left{display:flex;align-items:center;gap:12px}.icon-btn{border:0;background:transparent;padding:7px;display:inline-grid;place-items:center;font-size:21px;color:inherit}.kk-top strong{font-size:18px}.kk-top small{font-size:12px;color:#5b6471}.kk-timeline{flex:1;overflow-y:auto;padding:20px 13px 24px;scrollbar-width:none}.kk-date{text-align:center;color:#56616d;font-size:11px;margin-bottom:28px;background:#ffffff55;border-radius:25px;width:max-content;padding:6px 12px;margin-left:auto;margin-right:auto}.kk-msg{display:flex;align-items:flex-end;margin-bottom:12px;gap:7px}.kk-msg.me{flex-direction:row-reverse}.kk-avatar{width:36px;height:36px;border-radius:13px;background:#fff;display:grid;place-items:center;flex-shrink:0;font-size:24px;margin-bottom:8px}.kk-bubble{max-width:260px;background:#fff;border-radius:4px 13px 13px 13px;padding:10px 12px;white-space:pre-wrap;font-size:13px;line-height:1.55;box-shadow:0 1px 4px #0000000b}.kk-msg.me .kk-bubble{background:#ffe55c;border-radius:13px 4px 13px 13px}.kk-time{font-size:9px;color:#5c6472;white-space:nowrap;align-self:flex-end;margin-bottom:3px}.kk-actions{flex:0 0 auto;background:#fff;padding:12px 15px 18px;border-top:1px solid #d5dde3;display:flex;flex-direction:column;gap:8px}.kk-actions .tip{font-size:11px;color:#85898e;padding-left:2px}.primary-action{width:100%;background:#ff6f0f;border:0;color:#fff;border-radius:12px;padding:13px 17px;font-size:14px;font-weight:780}.secondary-action{width:100%;border:1px solid #d9dce1;background:#fff;border-radius:12px;padding:12px;font-size:13px;color:#313740;font-weight:650}.soft-action{border:0;background:#f5f6f8;color:#30343a;padding:11px 14px;border-radius:11px;font-weight:700;font-size:12px}.app-screen{height:100%;background:#fff;color:#212329;padding-top:50px;padding-bottom:24px;display:flex;flex-direction:column}.app-header{flex:0 0 56px;min-height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;border-bottom:1px solid #f1f1f2}.app-header h1{font-size:21px;font-weight:820;letter-spacing:-1px;margin:0}.app-header h2{font-size:17px;font-weight:760;margin:0}.app-header .subheader{font-size:12px;color:#8d949d}.app-header .head-right{display:flex;align-items:center;gap:6px}.app-header .head-left{display:flex;align-items:center;gap:7px}.app-header .head-left button{margin-left:-9px}.app-body{flex:1;min-height:0;overflow-y:auto;scrollbar-width:none}.app-body::-webkit-scrollbar,.chat-messages::-webkit-scrollbar,.kk-timeline::-webkit-scrollbar{display:none}.nav-tabs{flex:0 0 68px;display:flex;align-items:flex-start;justify-content:space-around;border-top:1px solid #e8e9ed;background:#fff;padding-top:9px;padding-bottom:13px}.nav-tab{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10px;color:#979da4;min-width:68px}.nav-tab.selected{color:#11161c;font-weight:760}.nav-tab .nav-symbol{font-size:22px;position:relative}.nav-tab .count{position:absolute;top:-5px;right:-12px;background:var(--orange);font-size:10px;color:#fff;border-radius:10px;padding:2px 4px;min-width:17px}.empty-start{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:90%;padding:25px 38px;color:#6f7480;gap:12px}.empty-start .illustration{font-size:72px}.empty-start h2{color:#22252b;font-size:20px;letter-spacing:-.5px;margin:0}.empty-start p{font-size:13px;line-height:1.7}.empty-start .primary-action{margin-top:10px}.feed-intro{padding:12px 17px 8px;font-size:12px;color:#92979e;background:#fff}.feed-items{padding:0 15px 84px}.feed-item{width:100%;display:flex;gap:14px;padding:16px 0;border:0;border-bottom:1px solid #f0f0f0;background:#fff;text-align:left;color:#22252a;align-items:flex-start}.feed-item img{width:114px;height:112px;border-radius:10px;flex:0 0 114px;background:#eee}.feed-item .description{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;padding-top:1px}.feed-item .description b{font-weight:540;font-size:15px;line-height:1.4;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.feed-item .description small{font-size:11px;color:#92979c}.feed-item .description strong{font-weight:780;font-size:15px}.tiny-activity{font-size:11px;color:#a7a7a7;margin-top:7px}.status-tag{display:inline-block;padding:4px 7px;border-radius:5px;font-size:10px;font-weight:700;background:#edf3f5;color:#55636f;align-self:flex-start}.status-tag.sold{background:#f1f0f0;color:#858585}.status-tag.waiting{background:#fff4ea;color:#d46f26}.fab{position:absolute;bottom:107px;right:17px;background:var(--orange);border:0;border-radius:30px;color:#fff;padding:12px 20px;box-shadow:0 6px 20px #ff6f0f48;font-size:15px;font-weight:760;display:flex;align-items:center;gap:7px}.compose-headline{padding:17px 18px 4px}.compose-headline h2{font-size:20px;letter-spacing:-.7px;margin:4px 0 6px}.compose-headline p{font-size:12px;color:#858a93;line-height:1.65}.compose-card{padding:12px 16px;display:flex;gap:13px;align-items:center;border-bottom:1px solid #f1f1f1}.compose-card img{width:76px;height:76px;border-radius:11px}.compose-card .info{flex:1;min-width:0}.compose-card .info b{display:block;font-size:13px}.compose-card .info small{display:block;font-size:12px;margin-top:5px;color:#7e838b}.compose-card .info p{margin-top:5px;font-size:10px;line-height:1.5;color:#888b90;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.compose-footer{padding:12px 16px 16px;border-top:1px solid #ebebee;background:#fff}.listing-large{width:100%;height:280px;object-fit:cover;background:#f1f1f1}.listing-info{padding:18px 18px 8px}.listing-info .seller{display:flex;align-items:center;gap:10px;padding-bottom:18px;border-bottom:1px solid #f0f1f2}.seller-avatar{width:39px;height:39px;border-radius:18px;background:#deedf0;display:grid;place-items:center;font-size:21px}.seller div b{display:block;font-size:14px}.seller div small{display:block;color:#9aa0a8;font-size:11px;margin-top:3px}.listing-info h2{font-size:21px;line-height:1.35;letter-spacing:-.9px;margin:22px 0 8px}.listing-meta{color:#8d9299;font-size:11px}.listing-info p{font-size:14px;line-height:1.8;white-space:pre-wrap;margin-top:21px}.listing-footer{border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 18px 18px}.listing-footer .price strong{font-size:18px;display:block}.listing-footer .price small{font-size:10px;color:#969ba3}.listing-footer .primary-action{width:165px}.chat-list-row{width:100%;text-align:left;background:#fff;border:0;border-bottom:1px solid #f3f3f3;display:flex;align-items:center;gap:12px;padding:14px 16px;color:#1e2227}.chat-list-row img.avatar{width:52px;height:52px;border-radius:22px;background:#f1f1f1}.chat-list-row .left{flex:1;min-width:0}.chat-list-row .left .rowhead{display:flex;gap:6px;align-items:center}.chat-list-row .left b{font-size:14px}.chat-list-row .left small{font-size:10px;color:#9fa3a9}.chat-list-row .preview{font-size:12px;margin-top:6px;color:#868c93;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:205px}.chat-list-row .product-thumb{width:46px;height:46px;border-radius:9px}.chat-list-row .unread{align-self:center;background:#ff6f0f;color:#fff;display:grid;place-items:center;font-size:10px;border-radius:12px;width:18px;height:18px}.chat-screen{height:100%;background:#f9fafb;padding-top:50px;padding-bottom:24px;display:flex;flex-direction:column}.chat-room-head{height:57px;flex:0 0 57px;border-bottom:1px solid #e9ebee;display:flex;align-items:center;gap:6px;padding:0 10px;background:#fff}.chat-room-head .name{flex:1;min-width:0}.chat-room-head .name b{font-size:15px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chat-room-head .name small{font-size:10px;color:#9b9da3;display:block;margin-top:3px}.hint-button{height:42px;min-width:56px;border-radius:15px;border:1px solid #b9d8e9;background:#eaf7ff;padding:4px 8px;font-size:19px;position:relative;letter-spacing:-6px;text-align:left;white-space:nowrap}.hint-button .hint-count{position:absolute;top:-8px;right:-6px;background:#175c84;color:#fff;font-size:10px;border-radius:11px;min-width:18px;height:18px;text-align:center;line-height:18px;letter-spacing:0}.chat-product{flex:0 0 73px;display:flex;align-items:center;gap:11px;border-bottom:1px solid #e9eaeb;padding:10px 15px;background:#fff}.chat-product img{width:48px;height:48px;border-radius:8px}.chat-product div{flex:1;min-width:0}.chat-product .line1{font-size:11px;color:#989da3;display:flex;gap:7px;align-items:center}.chat-product .line1 b{font-size:12px;color:#343a40}.chat-product strong{font-size:13px;display:block;margin-top:3px}.chat-product .step-count{color:#959ba3;font-size:11px;font-weight:730}.chat-messages{flex:1;min-height:0;overflow-y:auto;padding:18px 13px 22px;scrollbar-width:none}.room-day{text-align:center;font-size:10px;color:#a1a5ad;margin:3px auto 22px}.chat-bub-row{display:flex;align-items:flex-end;gap:7px;margin-bottom:13px;max-width:100%}.chat-bub-row.buyer{justify-content:flex-start}.chat-bub-row.me{justify-content:flex-end}.chat-bub-row .avatar{height:29px;width:29px;border-radius:12px;align-self:flex-start}.chat-bubble{font-size:13px;line-height:1.55;white-space:pre-wrap;max-width:255px;padding:10px 12px;border-radius:15px;box-shadow:0 1px 2px #00000008}.chat-bub-row.buyer .chat-bubble{background:#fff;border:1px solid #eeeeee;border-top-left-radius:3px}.chat-bub-row.me .chat-bubble{background:#ff9b45;color:#fff;border-top-right-radius:3px}.chat-time{font-size:9px;color:#a1a5aa;flex:0 0 auto;margin-bottom:2px}.chat-choices{flex:0 0 auto;background:#fff;border-top:1px solid #eaebed;padding:11px 13px 14px;max-height:45%;overflow-y:auto}.choice-label{font-size:11px;color:#878d96;margin-bottom:8px;display:flex;justify-content:space-between}.choice-btn{width:100%;border:1px solid #e5e7e9;border-radius:12px;background:#fff;color:#282f36;padding:11px 13px;text-align:left;margin-bottom:7px;min-height:39px;line-height:1.45;font-size:12px;display:flex;align-items:flex-start;gap:9px}.choice-btn:active{background:#fff1e5;border-color:#f6b37f}.choice-btn .letter{color:var(--orange);font-weight:800}.chat-result{flex:0 0 auto;border-top:1px solid #eceff1;background:#fff;padding:12px 14px 15px;display:flex;flex-direction:column;gap:8px}.result-line{font-size:12px;color:#444a50;text-align:center}.result-line strong{font-size:17px;color:#171d23}.wave-page{height:100%;background:#fff;padding:92px 24px 42px;display:flex;flex-direction:column;gap:22px;overflow-y:auto}.wave-emoji{font-size:52px;text-align:center}.wave-page h1{text-align:center;font-size:24px;letter-spacing:-.8px;margin:0}.wave-page .sub{text-align:center;color:#7e858f;font-size:13px;line-height:1.7}.wave-result-card{padding:18px 16px;border:1px solid #edeef1;border-radius:15px;background:#fafbfc}.wave-result-card b{font-size:14px;display:block;margin-bottom:9px}.wave-result-card span{font-size:12px;line-height:1.6;color:#666c75}.wave-result-card.success{border-left:4px solid #ff993e}.wave-result-card.fail{border-left:4px solid #afb4bf}.wave-spacer{flex:1}.progress-track{height:8px;border-radius:9px;background:#eef0f2;overflow:hidden}.progress-track > i{display:block;height:100%;background:#ff8428;border-radius:9px;transition:width .3s}.tiny-capsule{font-size:11px;border-radius:50px;padding:5px 9px;background:#f7f7f8;color:#747a84;font-weight:600}.my-section{padding:20px 17px;border-bottom:9px solid #f5f6f7}.my-profile{display:flex;align-items:center;gap:13px}.my-profile .avatar{width:64px;height:64px;border-radius:26px;background:#d9e2e9;display:grid;place-items:center;font-size:34px}.my-profile b{font-size:19px}.my-profile p{font-size:11px;color:#9297a0;line-height:1.8;margin-top:3px}.my-stats{display:flex;justify-content:space-around;margin-top:19px;border-radius:14px;background:#faf7f5;padding:15px 0}.my-stats div{text-align:center}.my-stats strong{font-size:20px;color:#f0751b;display:block}.my-stats small{font-size:10px;color:#92959c}.my-menu{padding:5px 12px}.my-menu button{width:100%;display:flex;justify-content:space-between;background:none;border:0;padding:17px 12px;border-bottom:1px solid #f1f1f3;font-size:13px;color:#25282d}.editor-head{padding:13px 18px;background:#fff5ec;color:#ad631f;font-size:11px;line-height:1.65}.editor-section{padding:14px 16px;border-bottom:8px solid #f5f5f6}.editor-section h3{font-size:16px;margin:5px 0 14px}.editor-row{display:flex;align-items:center;gap:13px;border-bottom:1px solid #f3f4f5;padding:10px 0}.editor-row img{width:52px;height:52px;border-radius:11px;background:#eee}.editor-row div{flex:1;min-width:0}.editor-row b{font-size:12px;display:block}.editor-row small{display:block;color:#9198a0;font-size:10px;margin-top:3px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.upload-label{background:#f5f6f7;border-radius:8px;padding:8px 9px;font-size:11px;font-weight:700;color:#555c66;white-space:nowrap;cursor:pointer}.upload-label input{position:absolute;left:-9999px;opacity:0}.editor-hint{padding:18px;font-size:11px;color:#9399a1;line-height:1.8}.spoilers{margin-top:15px;border:1px solid #e5e7ea;border-radius:12px;padding:14px}.spoilers summary{font-size:12px;font-weight:700;cursor:pointer}.spoilers p{font-size:12px;margin:8px 0;line-height:1.5;color:#777d87}.pulse{animation:pulse .8s ease-in-out infinite alternate}@keyframes pulse{from{opacity:.45}to{opacity:1}}@media(max-width:600px){.page-frame{padding:0;background:#fff}.device{height:100dvh;width:100vw;max-width:none;box-shadow:none;border-radius:0}.status-time{left:23px}.status-signals{right:24px}.app-grid{top:35.2%}.ios-home-widgets{top:8%}}@media(max-height:760px){.home-widget{min-height:133px}.ios-home-widgets{top:7%}.app-grid{top:35%;row-gap:14px}.app-icon{width:54px;height:54px}.ios-dock{height:81px}.lock-content{padding-top:75px}.listing-large{height:223px}.chat-choices{max-height:50%}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+</style>
+</head>
+<body>
+<div class="page-frame"><main class="device" id="device" aria-label="나유타의 휴대폰 시뮬레이터">
+  <div class="status-bar" id="status-bar" aria-hidden="true"></div>
+  <div class="screen" id="screen"></div>
+  <button type="button" id="home-bar" class="home-indicator" data-act="home" aria-label="휴대폰 홈으로 돌아가기"></button>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</main></div>
+<script>
+/* 편집은 전체수정용 ZIP의 game-data.js에서 진행해 주세요. */
+window.SIM_DATA = {
+  "title": "오늘도 당근해요, 유타!",
+  "version": "1.1",
+  "owner": "나유타",
+  "ownerNick": "조용한서랍",
+  "intro": [
+    {
+      "from": "su",
+      "text": "유타야, 잠깐 시간 있어?"
+    },
+    {
+      "from": "yuta",
+      "text": "응,,, 왜?"
+    },
+    {
+      "from": "su",
+      "text": "너 사람 만나기 힘들어하니까. 아예 사람을 만날 수밖에 없는 환경을 만들어보면 어떨까?"
+    },
+    {
+      "from": "su",
+      "text": "어차피 집에 정리해야 될 물건도 많다고 했고..."
+    },
+    {
+      "from": "su",
+      "text": "당근이라는 어플 알지? 직거래하는 거."
+    },
+    {
+      "from": "yuta",
+      "text": "응,,, 깔려져 있긴 한데,,,"
+    },
+    {
+      "from": "su",
+      "text": "거기에 물건을 올려서 팔아보면 어떨까?"
+    },
+    {
+      "from": "su",
+      "text": "너 어차피 물건 정리해야 된다고도 했고..."
+    },
+    {
+      "from": "su",
+      "text": "먼저 글부터 올려봐 ㅎㅎ"
+    },
+    {
+      "from": "su",
+      "text": "혹시 너무 힘들면 내가 도와줄게"
+    },
+    {
+      "from": "yuta",
+      "text": "직접 사람을 만나는 건 좀 무서운데... 일단 해볼게."
+    },
+    {
+      "from": "su",
+      "text": "그거면 충분하지. 천천히 해, 유타."
+    }
+  ],
+  "items": [
+    {
+      "id": "marker",
+      "title": "마커 12색 + 미니 스케치북",
+      "price": 7000,
+      "category": "도서/문구",
+      "tag": "마커",
+      "icon": "🖍️",
+      "accent": "#d9effc",
+      "description": "마커 12색 전부 테스트했고 잘 나와요. 작은 스케치북도 같이 드립니다. 그림 그릴 때 쓰다가 정리합니다.",
+      "photo": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDYwIj48ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNkOWVmZmMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmZkZjkiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0ic2hhZG93Ij48ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMTIiIHN0ZERldmlhdGlvbj0iMTUiIGZsb29kLWNvbG9yPSIjNjg3Mzg5IiBmbG9vZC1vcGFjaXR5PSIuMTYiLz48L2ZpbHRlcj48L2RlZnM+CiAgICA8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ2MCIgZmlsbD0idXJsKCNnKSIvPgogICAgPGNpcmNsZSBjeD0iNDkwIiBjeT0iNTUiIHI9IjExOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjMyIi8+PGNpcmNsZSBjeD0iODIiIGN5PSIzOTIiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI5Ii8+CiAgICA8cmVjdCB4PSIxMzkiIHk9IjcwIiB3aWR0aD0iMzIyIiBoZWlnaHQ9IjMxMyIgcng9IjM5IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuNzIiIGZpbHRlcj0idXJsKCNzaGFkb3cpIi8+CiAgICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSIyMDIiIHI9IjEyNiIgZmlsbD0iI2Q5ZWZmYyIgb3BhY2l0eT0iLjY0Ii8+CiAgICA8dGV4dCB4PSIzMDAiIHk9IjI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNTYiIGZvbnQtZmFtaWx5PSJBcHBsZSBDb2xvciBFbW9qaSxTZWdvZSBVSSBFbW9qaSxOb3RvIENvbG9yIEVtb2ppLHNhbnMtc2VyaWYiPvCflo3vuI88L3RleHQ+CiAgICA8cmVjdCB4PSIyMzQiIHk9IjM0MSIgd2lkdGg9IjEzMiIgaGVpZ2h0PSIzNSIgcng9IjE3IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuODgiLz48dGV4dCB4PSIzMDAiIHk9IjM2NSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NDU0NWUiPuuniOy7pDwvdGV4dD48L3N2Zz4="
+    },
+    {
+      "id": "poster",
+      "title": "밤하늘 포스터 + 액자",
+      "price": 6000,
+      "category": "가구/인테리어",
+      "tag": "포스터",
+      "icon": "🌌",
+      "accent": "#dbe0ee",
+      "description": "남색 밤하늘 그림 포스터와 액자입니다. 인쇄색은 사진보다 조금 짙고, 액자 유리의 반사가 있어요. 포스터 모서리 접힘은 없습니다.",
+      "photo": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDYwIj48ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNkYmUwZWUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmZkZjkiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0ic2hhZG93Ij48ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMTIiIHN0ZERldmlhdGlvbj0iMTUiIGZsb29kLWNvbG9yPSIjNjg3Mzg5IiBmbG9vZC1vcGFjaXR5PSIuMTYiLz48L2ZpbHRlcj48L2RlZnM+CiAgICA8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ2MCIgZmlsbD0idXJsKCNnKSIvPgogICAgPGNpcmNsZSBjeD0iNDkwIiBjeT0iNTUiIHI9IjExOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjMyIi8+PGNpcmNsZSBjeD0iODIiIGN5PSIzOTIiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI5Ii8+CiAgICA8cmVjdCB4PSIxMzkiIHk9IjcwIiB3aWR0aD0iMzIyIiBoZWlnaHQ9IjMxMyIgcng9IjM5IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuNzIiIGZpbHRlcj0idXJsKCNzaGFkb3cpIi8+CiAgICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSIyMDIiIHI9IjEyNiIgZmlsbD0iI2RiZTBlZSIgb3BhY2l0eT0iLjY0Ii8+CiAgICA8dGV4dCB4PSIzMDAiIHk9IjI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNTYiIGZvbnQtZmFtaWx5PSJBcHBsZSBDb2xvciBFbW9qaSxTZWdvZSBVSSBFbW9qaSxOb3RvIENvbG9yIEVtb2ppLHNhbnMtc2VyaWYiPvCfjIw8L3RleHQ+CiAgICA8cmVjdCB4PSIyMzQiIHk9IjM0MSIgd2lkdGg9IjEzMiIgaGVpZ2h0PSIzNSIgcng9IjE3IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuODgiLz48dGV4dCB4PSIzMDAiIHk9IjM2NSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NDU0NWUiPu2PrOyKpO2EsDwvdGV4dD48L3N2Zz4="
+    },
+    {
+      "id": "keycaps",
+      "title": "기계식 키보드 키캡 20개",
+      "price": 11000,
+      "category": "디지털기기",
+      "tag": "키캡",
+      "icon": "⌨️",
+      "accent": "#d4ebe2",
+      "description": "십자축용 키캡 20개입니다. 약 3개월 사용했고 모서리 한 곳에 생활흠집이 있어요. 키캡 리무버는 포함하지 않습니다.",
+      "photo": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDYwIj48ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNkNGViZTIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmZkZjkiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0ic2hhZG93Ij48ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMTIiIHN0ZERldmlhdGlvbj0iMTUiIGZsb29kLWNvbG9yPSIjNjg3Mzg5IiBmbG9vZC1vcGFjaXR5PSIuMTYiLz48L2ZpbHRlcj48L2RlZnM+CiAgICA8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ2MCIgZmlsbD0idXJsKCNnKSIvPgogICAgPGNpcmNsZSBjeD0iNDkwIiBjeT0iNTUiIHI9IjExOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjMyIi8+PGNpcmNsZSBjeD0iODIiIGN5PSIzOTIiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI5Ii8+CiAgICA8cmVjdCB4PSIxMzkiIHk9IjcwIiB3aWR0aD0iMzIyIiBoZWlnaHQ9IjMxMyIgcng9IjM5IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuNzIiIGZpbHRlcj0idXJsKCNzaGFkb3cpIi8+CiAgICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSIyMDIiIHI9IjEyNiIgZmlsbD0iI2Q0ZWJlMiIgb3BhY2l0eT0iLjY0Ii8+CiAgICA8dGV4dCB4PSIzMDAiIHk9IjI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNTYiIGZvbnQtZmFtaWx5PSJBcHBsZSBDb2xvciBFbW9qaSxTZWdvZSBVSSBFbW9qaSxOb3RvIENvbG9yIEVtb2ppLHNhbnMtc2VyaWYiPuKMqO+4jzwvdGV4dD4KICAgIDxyZWN0IHg9IjIzNCIgeT0iMzQxIiB3aWR0aD0iMTMyIiBoZWlnaHQ9IjM1IiByeD0iMTciIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii44OCIvPjx0ZXh0IHg9IjMwMCIgeT0iMzY1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU0NTQ1ZSI+7YKk7LqhPC90ZXh0Pjwvc3ZnPg=="
+    },
+    {
+      "id": "rabbit",
+      "title": "작은 토끼 키링 + 리본",
+      "price": 4000,
+      "category": "취미/굿즈",
+      "tag": "키링",
+      "icon": "🐰",
+      "accent": "#e9e3f6",
+      "description": "가방에 달았던 작은 토끼 키링이에요. 리본 포함입니다. 사용감은 조금 있지만 찢어짐이나 얼룩은 없어요. 사진에 보이는 구성 그대로 드립니다.",
+      "photo": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDYwIj48ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNlOWUzZjYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmZkZjkiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0ic2hhZG93Ij48ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMTIiIHN0ZERldmlhdGlvbj0iMTUiIGZsb29kLWNvbG9yPSIjNjg3Mzg5IiBmbG9vZC1vcGFjaXR5PSIuMTYiLz48L2ZpbHRlcj48L2RlZnM+CiAgICA8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ2MCIgZmlsbD0idXJsKCNnKSIvPgogICAgPGNpcmNsZSBjeD0iNDkwIiBjeT0iNTUiIHI9IjExOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjMyIi8+PGNpcmNsZSBjeD0iODIiIGN5PSIzOTIiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI5Ii8+CiAgICA8cmVjdCB4PSIxMzkiIHk9IjcwIiB3aWR0aD0iMzIyIiBoZWlnaHQ9IjMxMyIgcng9IjM5IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuNzIiIGZpbHRlcj0idXJsKCNzaGFkb3cpIi8+CiAgICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSIyMDIiIHI9IjEyNiIgZmlsbD0iI2U5ZTNmNiIgb3BhY2l0eT0iLjY0Ii8+CiAgICA8dGV4dCB4PSIzMDAiIHk9IjI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNTYiIGZvbnQtZmFtaWx5PSJBcHBsZSBDb2xvciBFbW9qaSxTZWdvZSBVSSBFbW9qaSxOb3RvIENvbG9yIEVtb2ppLHNhbnMtc2VyaWYiPvCfkLA8L3RleHQ+CiAgICA8cmVjdCB4PSIyMzQiIHk9IjM0MSIgd2lkdGg9IjEzMiIgaGVpZ2h0PSIzNSIgcng9IjE3IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuODgiLz48dGV4dCB4PSIzMDAiIHk9IjM2NSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NDU0NWUiPu2CpOungTwvdGV4dD48L3N2Zz4="
+    },
+    {
+      "id": "sleeves",
+      "title": "카드 슬리브 100매 미개봉",
+      "price": 6500,
+      "category": "취미/게임",
+      "tag": "슬리브",
+      "icon": "🃏",
+      "accent": "#f2e4d9",
+      "description": "카드 슬리브 100매 미개봉 제품이에요. 사진 속 투명 케이스는 촬영용 소품이라 미포함입니다. 직거래만 가능합니다.",
+      "photo": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDYwIj48ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNmMmU0ZDkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmZkZjkiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0ic2hhZG93Ij48ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMTIiIHN0ZERldmlhdGlvbj0iMTUiIGZsb29kLWNvbG9yPSIjNjg3Mzg5IiBmbG9vZC1vcGFjaXR5PSIuMTYiLz48L2ZpbHRlcj48L2RlZnM+CiAgICA8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ2MCIgZmlsbD0idXJsKCNnKSIvPgogICAgPGNpcmNsZSBjeD0iNDkwIiBjeT0iNTUiIHI9IjExOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjMyIi8+PGNpcmNsZSBjeD0iODIiIGN5PSIzOTIiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI5Ii8+CiAgICA8cmVjdCB4PSIxMzkiIHk9IjcwIiB3aWR0aD0iMzIyIiBoZWlnaHQ9IjMxMyIgcng9IjM5IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuNzIiIGZpbHRlcj0idXJsKCNzaGFkb3cpIi8+CiAgICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSIyMDIiIHI9IjEyNiIgZmlsbD0iI2YyZTRkOSIgb3BhY2l0eT0iLjY0Ii8+CiAgICA8dGV4dCB4PSIzMDAiIHk9IjI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNTYiIGZvbnQtZmFtaWx5PSJBcHBsZSBDb2xvciBFbW9qaSxTZWdvZSBVSSBFbW9qaSxOb3RvIENvbG9yIEVtb2ppLHNhbnMtc2VyaWYiPvCfg488L3RleHQ+CiAgICA8cmVjdCB4PSIyMzQiIHk9IjM0MSIgd2lkdGg9IjEzMiIgaGVpZ2h0PSIzNSIgcng9IjE3IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuODgiLz48dGV4dCB4PSIzMDAiIHk9IjM2NSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NDU0NWUiPuyKrOumrOu4jDwvdGV4dD48L3N2Zz4="
+    },
+    {
+      "id": "headset",
+      "title": "심플 헤드셋 거치대",
+      "price": 9000,
+      "category": "디지털기기",
+      "tag": "거치대",
+      "icon": "🎧",
+      "accent": "#eee4cd",
+      "description": "책상 위에 놓는 헤드셋 거치대입니다. 일반 헤드셋에 사용했고 바닥에 잔흠집이 있지만 흔들림은 없어요. 무게에 따라 안정성은 다를 수 있습니다.",
+      "photo": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDYwIj48ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNlZWU0Y2QiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmZkZjkiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0ic2hhZG93Ij48ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMTIiIHN0ZERldmlhdGlvbj0iMTUiIGZsb29kLWNvbG9yPSIjNjg3Mzg5IiBmbG9vZC1vcGFjaXR5PSIuMTYiLz48L2ZpbHRlcj48L2RlZnM+CiAgICA8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ2MCIgZmlsbD0idXJsKCNnKSIvPgogICAgPGNpcmNsZSBjeD0iNDkwIiBjeT0iNTUiIHI9IjExOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjMyIi8+PGNpcmNsZSBjeD0iODIiIGN5PSIzOTIiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI5Ii8+CiAgICA8cmVjdCB4PSIxMzkiIHk9IjcwIiB3aWR0aD0iMzIyIiBoZWlnaHQ9IjMxMyIgcng9IjM5IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuNzIiIGZpbHRlcj0idXJsKCNzaGFkb3cpIi8+CiAgICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSIyMDIiIHI9IjEyNiIgZmlsbD0iI2VlZTRjZCIgb3BhY2l0eT0iLjY0Ii8+CiAgICA8dGV4dCB4PSIzMDAiIHk9IjI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNTYiIGZvbnQtZmFtaWx5PSJBcHBsZSBDb2xvciBFbW9qaSxTZWdvZSBVSSBFbW9qaSxOb3RvIENvbG9yIEVtb2ppLHNhbnMtc2VyaWYiPvCfjqc8L3RleHQ+CiAgICA8cmVjdCB4PSIyMzQiIHk9IjM0MSIgd2lkdGg9IjEzMiIgaGVpZ2h0PSIzNSIgcng9IjE3IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuODgiLz48dGV4dCB4PSIzMDAiIHk9IjM2NSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NDU0NWUiPuqxsOy5mOuMgDwvdGV4dD48L3N2Zz4="
+    },
+    {
+      "id": "pins",
+      "title": "실버 헤어핀 세트 (3개)",
+      "price": 4500,
+      "category": "패션잡화",
+      "tag": "헤어핀",
+      "icon": "✨",
+      "accent": "#fee1eb",
+      "description": "실버색 헤어핀 3개 세트입니다. 하나의 끝부분에 작은 코팅 벗겨짐이 있고 나머지는 상태 괜찮아요. 사진 확인 부탁드립니다.",
+      "photo": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDYwIj48ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNmZWUxZWIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmZkZjkiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0ic2hhZG93Ij48ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMTIiIHN0ZERldmlhdGlvbj0iMTUiIGZsb29kLWNvbG9yPSIjNjg3Mzg5IiBmbG9vZC1vcGFjaXR5PSIuMTYiLz48L2ZpbHRlcj48L2RlZnM+CiAgICA8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ2MCIgZmlsbD0idXJsKCNnKSIvPgogICAgPGNpcmNsZSBjeD0iNDkwIiBjeT0iNTUiIHI9IjExOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjMyIi8+PGNpcmNsZSBjeD0iODIiIGN5PSIzOTIiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI5Ii8+CiAgICA8cmVjdCB4PSIxMzkiIHk9IjcwIiB3aWR0aD0iMzIyIiBoZWlnaHQ9IjMxMyIgcng9IjM5IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuNzIiIGZpbHRlcj0idXJsKCNzaGFkb3cpIi8+CiAgICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSIyMDIiIHI9IjEyNiIgZmlsbD0iI2ZlZTFlYiIgb3BhY2l0eT0iLjY0Ii8+CiAgICA8dGV4dCB4PSIzMDAiIHk9IjI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNTYiIGZvbnQtZmFtaWx5PSJBcHBsZSBDb2xvciBFbW9qaSxTZWdvZSBVSSBFbW9qaSxOb3RvIENvbG9yIEVtb2ppLHNhbnMtc2VyaWYiPuKcqDwvdGV4dD4KICAgIDxyZWN0IHg9IjIzNCIgeT0iMzQxIiB3aWR0aD0iMTMyIiBoZWlnaHQ9IjM1IiByeD0iMTciIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii44OCIvPjx0ZXh0IHg9IjMwMCIgeT0iMzY1IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzU0NTQ1ZSI+7Zek7Ja07ZWAPC90ZXh0Pjwvc3ZnPg=="
+    },
+    {
+      "id": "cd",
+      "title": "게임 OST 한정판 CD (개봉)",
+      "price": 22000,
+      "category": "음반/굿즈",
+      "tag": "CD",
+      "icon": "💿",
+      "accent": "#e4e1fa",
+      "description": "한정판 OST CD와 소책자 구성입니다. 특전 카드는 없고, 개봉 후 두 번 재생했습니다. 눈에 띄는 흠집은 없지만 중고품인 점 확인해주세요.",
+      "photo": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDYwIj48ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNlNGUxZmEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmZkZjkiLz48L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0ic2hhZG93Ij48ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMTIiIHN0ZERldmlhdGlvbj0iMTUiIGZsb29kLWNvbG9yPSIjNjg3Mzg5IiBmbG9vZC1vcGFjaXR5PSIuMTYiLz48L2ZpbHRlcj48L2RlZnM+CiAgICA8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQ2MCIgZmlsbD0idXJsKCNnKSIvPgogICAgPGNpcmNsZSBjeD0iNDkwIiBjeT0iNTUiIHI9IjExOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjMyIi8+PGNpcmNsZSBjeD0iODIiIGN5PSIzOTIiIHI9IjEzMCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjI5Ii8+CiAgICA8cmVjdCB4PSIxMzkiIHk9IjcwIiB3aWR0aD0iMzIyIiBoZWlnaHQ9IjMxMyIgcng9IjM5IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuNzIiIGZpbHRlcj0idXJsKCNzaGFkb3cpIi8+CiAgICA8Y2lyY2xlIGN4PSIzMDAiIGN5PSIyMDIiIHI9IjEyNiIgZmlsbD0iI2U0ZTFmYSIgb3BhY2l0eT0iLjY0Ii8+CiAgICA8dGV4dCB4PSIzMDAiIHk9IjI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxNTYiIGZvbnQtZmFtaWx5PSJBcHBsZSBDb2xvciBFbW9qaSxTZWdvZSBVSSBFbW9qaSxOb3RvIENvbG9yIEVtb2ppLHNhbnMtc2VyaWYiPvCfkr88L3RleHQ+CiAgICA8cmVjdCB4PSIyMzQiIHk9IjM0MSIgd2lkdGg9IjEzMiIgaGVpZ2h0PSIzNSIgcng9IjE3IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuODgiLz48dGV4dCB4PSIzMDAiIHk9IjM2NSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI3MDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NDU0NWUiPkNEPC90ZXh0Pjwvc3ZnPg=="
+    }
+  ],
+  "buyers": [
+    {
+      "id": "semi",
+      "name": "세미",
+      "nick": "색연필열두개",
+      "hint": "이 사람은 메시지가 빠르고 질문도 한꺼번에 하네. 하나씩 차분하게 대답하고, 가능한 시간과 구성품을 명확하게 정리해 줘. 이모티콘을 꼭 많이 쓸 필요는 없어.",
+      "accent": "#d7ebfb",
+      "hair": "#aa6c46",
+      "hairStyle": "short",
+      "face": "🎨",
+      "endOk": "오케이! 저 이거 살래요! 내일 공원 입구에서 만나요 ㅎㅎ",
+      "endNo": "앗 아쉽다 ㅠㅠ 이번엔 다른 거 찾아볼게요!",
+      "itemId": "marker",
+      "difficulty": "쉬움",
+      "summary": "[임시 설정] 밝고 수다스러우며 질문이 많은 낙천적인 사람.",
+      "profile": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj4KICAgIDxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iYmciPjxzdG9wIHN0b3AtY29sb3I9IiNmZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNkN2ViZmIiLz48L3JhZGlhbEdyYWRpZW50PjxjbGlwUGF0aCBpZD0iY2xpcCI+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iODgiLz48L2NsaXBQYXRoPjwvZGVmcz4KICAgIDxjaXJjbGUgY3g9IjkwIiBjeT0iOTAiIHI9Ijg4IiBmaWxsPSJ1cmwoI2JnKSIvPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwKSI+CiAgICA8Y2lyY2xlIGN4PSIyOCIgY3k9IjMwIiByPSIyOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjM3Ii8+PGNpcmNsZSBjeD0iMTYyIiBjeT0iMTMyIiByPSI0MiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjIzIi8+CiAgICA8cGF0aCBkPSJNMTUgMTgyIFExNSAxMTggODQgMTIwIEwxMDIgMTIwIFExNjUgMTIwIDE2OSAxODIiIGZpbGw9IiNhYTZjNDYiIG9wYWNpdHk9Ii44Ii8+CiAgICA8cmVjdCB4PSI3NiIgeT0iMTExIiB3aWR0aD0iMjkiIGhlaWdodD0iMjQiIHJ4PSI5IiBmaWxsPSIjZWRjNmFjIi8+CiAgICA8ZWxsaXBzZSBjeD0iOTAiIGN5PSI4OSIgcng9IjQ4IiByeT0iNTMiIGZpbGw9IiNmNmQ1YmIiLz4KICAgIDxlbGxpcHNlIGN4PSI0MyIgY3k9Ijk1IiByeD0iNyIgcnk9IjEyIiBmaWxsPSIjZWRjNmFjIi8+PGVsbGlwc2UgY3g9IjEzNiIgY3k9Ijk1IiByeD0iNyIgcnk9IjEyIiBmaWxsPSIjZWRjNmFjIi8+CiAgICA8cGF0aCBkPSJNMzkgOTEgUTMyIDQzIDgzIDMzIFExNDUgMzEgMTM5IDkzIEwxMjEgNjkgUTkwIDc4IDYxIDY3WiIgZmlsbD0iI2FhNmM0NiIvPgogICAgPHBhdGggZD0iTTY5IDk4IHE5IC02IDE3IDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzUzNTA1YiIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxwYXRoIGQ9Ik05OSA5OCBxOSAtNiAxNyAwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1MzUwNWIiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNODggMTEyIHE0IDQgOCAwIiBmaWxsPSJub25lIiBzdHJva2U9IiNiNzZjNzkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8Y2lyY2xlIGN4PSI1OSIgY3k9IjExMSIgcj0iNyIgZmlsbD0iI2VkOWVhYSIgb3BhY2l0eT0iLjI3Ii8+PGNpcmNsZSBjeD0iMTIxIiBjeT0iMTExIiByPSI3IiBmaWxsPSIjZWQ5ZWFhIiBvcGFjaXR5PSIuMjciLz4KICAgIDwvZz48Y2lyY2xlIGN4PSI5MCIgY3k9IjkwIiByPSI4NyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iLjkiIHN0cm9rZS13aWR0aD0iNCIvPgogICAgPGNpcmNsZSBjeD0iMTQ1IiBjeT0iMTM5IiByPSIyNyIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjk0Ii8+PHRleHQgeD0iMTQ1IiB5PSIxNDgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjYiPvCfjqg8L3RleHQ+PC9zdmc+",
+      "steps": [
+        {
+          "buyer": "헉 마커 세트! 아직 안 팔렸죠??",
+          "options": [
+            {
+              "text": "너무 급하시네요.",
+              "point": 0,
+              "reply": "앗… 제가 너무 호들갑이었나."
+            },
+            {
+              "text": "안녕하세요! 네, 판매 중이에요.",
+              "point": 1,
+              "reply": "오예 다행이에요!"
+            }
+          ]
+        },
+        {
+          "buyer": "진짜 12색 다 들어있어요?",
+          "options": [
+            {
+              "text": "대충 그쯤 될걸요.",
+              "point": 0,
+              "reply": "헐 구성 모르면 곤란한데."
+            },
+            {
+              "text": "네, 사진에 있는 12색 전부예요.",
+              "point": 1,
+              "reply": "완전 좋아요!"
+            }
+          ]
+        },
+        {
+          "buyer": "칠하다 보면 마커가 안 나오는 색은 없죠?",
+          "options": [
+            {
+              "text": "몇 개는 안 나와도 괜찮죠?",
+              "point": 0,
+              "reply": "그럼 고민되네요…"
+            },
+            {
+              "text": "전부 시험해봤고 잘 나와요.",
+              "point": 1,
+              "reply": "오 안심!"
+            }
+          ]
+        },
+        {
+          "buyer": "같이 올린 작은 스케치북도 포함인가용",
+          "options": [
+            {
+              "text": "아뇨, 마커만 가져가세요.",
+              "point": 0,
+              "reply": "앗 제가 잘못 봤네요."
+            },
+            {
+              "text": "네! 스케치북도 함께 드려요.",
+              "point": 1,
+              "reply": "헉 혜자다…!"
+            }
+          ]
+        },
+        {
+          "buyer": "제가 쫌 수다 떠는데 괜찮아요?ㅋㅋ",
+          "options": [
+            {
+              "text": "네, 말 좀 줄여주세요.",
+              "point": 0,
+              "reply": "앗… 조용히 할게요."
+            },
+            {
+              "text": "괜찮아요 ㅎㅎ 필요한 거 편히 물어보세요.",
+              "point": 1,
+              "reply": "판매자분 진짜 친절하시다."
+            }
+          ]
+        },
+        {
+          "buyer": "가격 7천 원 맞죠?",
+          "options": [
+            {
+              "text": "오늘은 9천 원으로요.",
+              "point": 0,
+              "reply": "으앗 가격 달라지면 좀…"
+            },
+            {
+              "text": "네, 7천 원이에요.",
+              "point": 1,
+              "reply": "확인 완료!"
+            }
+          ]
+        },
+        {
+          "buyer": "내일 오후는 괜찮아요?",
+          "options": [
+            {
+              "text": "내일은 바쁜데 그냥 오세요.",
+              "point": 0,
+              "reply": "엇 그럼 약속을 잡기 어렵네요."
+            },
+            {
+              "text": "네, 오후 중엔 가능해요. 몇 시가 편하세요?",
+              "point": 1,
+              "reply": "저는 5시가 좋아요!"
+            }
+          ]
+        },
+        {
+          "buyer": "공원 입구가 밝아서 거기 좋을 듯?!",
+          "options": [
+            {
+              "text": "공원 뒤쪽은 어때요?",
+              "point": 0,
+              "reply": "제가 길을 잘 몰라서요."
+            },
+            {
+              "text": "좋아요. 사람 많은 큰 입구에서 만나요.",
+              "point": 1,
+              "reply": "좋죠 좋죠!"
+            }
+          ]
+        },
+        {
+          "buyer": "혹시 늦으면 연락해도 되겠죠 ㅠ",
+          "options": [
+            {
+              "text": "늦으면 그냥 갈 거예요.",
+              "point": 0,
+              "reply": "아… 불안하네용."
+            },
+            {
+              "text": "네, 늦을 것 같으면 미리 채팅 주세요.",
+              "point": 1,
+              "reply": "그럼 꼭 미리 말할게요."
+            }
+          ]
+        },
+        {
+          "buyer": "마지막! 현금으로 드려도 돼요?",
+          "options": [
+            {
+              "text": "무조건 다른 결제만 돼요.",
+              "point": 0,
+              "reply": "앗 결제가 어렵겠어요."
+            },
+            {
+              "text": "네, 현금으로 주셔도 괜찮아요.",
+              "point": 1,
+              "reply": "완전 좋다. 거래할게요!"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dam",
+      "name": "선우 담",
+      "nick": "검은여백",
+      "hint": "말이 짧아도 무례하다고 받아들이지 마. 불필요하게 캐묻지 말고, 상대가 요구한 거래 조건에만 집중해. 대신 네가 지켜야 할 경계는 조용하고 분명하게 말하면 돼.",
+      "accent": "#d9dbe4",
+      "hair": "#292b37",
+      "hairStyle": "hood",
+      "face": "✖️",
+      "endOk": "…좋네요. 그럼 사겠습니다. 약속 장소에서 봐요.",
+      "endNo": "…아닙니다. 이번엔 그만둘게요.",
+      "itemId": "poster",
+      "difficulty": "쉬움",
+      "summary": "[임시 설정] 말수가 적고 개인적인 질문을 피하며 약속과 경계를 중요시함.",
+      "profile": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj4KICAgIDxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iYmciPjxzdG9wIHN0b3AtY29sb3I9IiNmZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNkOWRiZTQiLz48L3JhZGlhbEdyYWRpZW50PjxjbGlwUGF0aCBpZD0iY2xpcCI+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iODgiLz48L2NsaXBQYXRoPjwvZGVmcz4KICAgIDxjaXJjbGUgY3g9IjkwIiBjeT0iOTAiIHI9Ijg4IiBmaWxsPSJ1cmwoI2JnKSIvPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwKSI+CiAgICA8Y2lyY2xlIGN4PSIyOCIgY3k9IjMwIiByPSIyOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjM3Ii8+PGNpcmNsZSBjeD0iMTYyIiBjeT0iMTMyIiByPSI0MiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjIzIi8+CiAgICA8cGF0aCBkPSJNMTUgMTgyIFExNSAxMTggODQgMTIwIEwxMDIgMTIwIFExNjUgMTIwIDE2OSAxODIiIGZpbGw9IiMyOTJiMzciIG9wYWNpdHk9Ii44Ii8+CiAgICA8cmVjdCB4PSI3NiIgeT0iMTExIiB3aWR0aD0iMjkiIGhlaWdodD0iMjQiIHJ4PSI5IiBmaWxsPSIjZWRjNmFjIi8+CiAgICA8ZWxsaXBzZSBjeD0iOTAiIGN5PSI4OSIgcng9IjQ4IiByeT0iNTMiIGZpbGw9IiNmNmQ1YmIiLz4KICAgIDxlbGxpcHNlIGN4PSI0MyIgY3k9Ijk1IiByeD0iNyIgcnk9IjEyIiBmaWxsPSIjZWRjNmFjIi8+PGVsbGlwc2UgY3g9IjEzNiIgY3k9Ijk1IiByeD0iNyIgcnk9IjEyIiBmaWxsPSIjZWRjNmFjIi8+CiAgICA8cGF0aCBkPSJNMjYgMTYxIEw0MCA3OSBRMzkgMjggOTIgMzAgUTE0OSAzMSAxNDkgODQgTDE1NyAxNjFaIiBmaWxsPSIjMzkzYjRhIi8+PHBhdGggZD0iTTU3IDg2IFE1NCA1MCA5MSA0NSBRMTMyIDQ1IDEyOSA5MVoiIGZpbGw9IiMyOTJiMzciLz48cmVjdCB4PSI0OCIgeT0iNzQiIHdpZHRoPSI4NiIgaGVpZ2h0PSI0OCIgcng9IjE0IiBmaWxsPSIjMjMyNTM0IiBvcGFjaXR5PSIuMTQiLz4KICAgIDxwYXRoIGQ9Ik02OSA5OCBxOSAtNiAxNyAwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1MzUwNWIiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNOTkgOTggcTkgLTYgMTcgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTM1MDViIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTg4IDExMiBxNCA0IDggMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjc2Yzc5IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPGNpcmNsZSBjeD0iNTkiIGN5PSIxMTEiIHI9IjciIGZpbGw9IiNlZDllYWEiIG9wYWNpdHk9Ii4yNyIvPjxjaXJjbGUgY3g9IjEyMSIgY3k9IjExMSIgcj0iNyIgZmlsbD0iI2VkOWVhYSIgb3BhY2l0eT0iLjI3Ii8+CiAgICA8L2c+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iODciIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii45IiBzdHJva2Utd2lkdGg9IjQiLz4KICAgIDxjaXJjbGUgY3g9IjE0NSIgY3k9IjEzOSIgcj0iMjciIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii45NCIvPjx0ZXh0IHg9IjE0NSIgeT0iMTQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI2Ij7inJbvuI88L3RleHQ+PC9zdmc+",
+      "steps": [
+        {
+          "buyer": "포스터 아직 있나요.",
+          "options": [
+            {
+              "text": "왜요?",
+              "point": 0,
+              "reply": "…"
+            },
+            {
+              "text": "네, 아직 판매 중입니다.",
+              "point": 1,
+              "reply": "확인."
+            }
+          ]
+        },
+        {
+          "buyer": "액자 포함. 맞습니까.",
+          "options": [
+            {
+              "text": "네, 액자와 포스터 함께입니다.",
+              "point": 1,
+              "reply": "알겠습니다."
+            },
+            {
+              "text": "액자는 별도입니다.",
+              "point": 0,
+              "reply": "글이랑 다르네요."
+            }
+          ]
+        },
+        {
+          "buyer": "사진엔 유리 반사가 심하네요.",
+          "options": [
+            {
+              "text": "반사 없는데요.",
+              "point": 0,
+              "reply": "…상태를 확인하기 어렵겠네요."
+            },
+            {
+              "text": "맞아요. 유리 반사 때문에 실제 인쇄색은 따로 설명드릴게요.",
+              "point": 1,
+              "reply": "설명해 주세요."
+            }
+          ]
+        },
+        {
+          "buyer": "색은 더 어둡습니까, 밝습니까.",
+          "options": [
+            {
+              "text": "거의 검정색일걸요.",
+              "point": 0,
+              "reply": "애매하군요."
+            },
+            {
+              "text": "실물은 사진보다 남색이 조금 더 짙습니다.",
+              "point": 1,
+              "reply": "좋습니다."
+            }
+          ]
+        },
+        {
+          "buyer": "누가 만들었는지 묻지는 않겠습니다.",
+          "options": [
+            {
+              "text": "네, 거래와 관련된 내용만 말씀드릴게요.",
+              "point": 1,
+              "reply": "…그거면 됩니다."
+            },
+            {
+              "text": "왜 그런 말 하세요? 혹시 같은 학교?",
+              "point": 0,
+              "reply": "개인적인 건 묻지 않았는데."
+            }
+          ]
+        },
+        {
+          "buyer": "가격 조정은요.",
+          "options": [
+            {
+              "text": "상태를 고려해 6,000원으로 정했습니다.",
+              "point": 1,
+              "reply": "이해했습니다."
+            },
+            {
+              "text": "원하시는 만큼 주세요.",
+              "point": 0,
+              "reply": "기준이 없네요."
+            }
+          ]
+        },
+        {
+          "buyer": "포스터 모서리는 접히지 않았나요.",
+          "options": [
+            {
+              "text": "그런 것까지 묻나요.",
+              "point": 0,
+              "reply": "상태가 걱정됩니다."
+            },
+            {
+              "text": "네, 액자 안에 넣어두어 접힘은 없습니다.",
+              "point": 1,
+              "reply": "좋네요."
+            }
+          ]
+        },
+        {
+          "buyer": "상자 없으면 들고 가기 어려울 듯한데.",
+          "options": [
+            {
+              "text": "완충재와 종이봉투로 감싸두겠습니다.",
+              "point": 1,
+              "reply": "그 정도면 됩니다."
+            },
+            {
+              "text": "제가 대신 집까지 가져다드릴까요?",
+              "point": 0,
+              "reply": "불편하겠네요."
+            }
+          ]
+        },
+        {
+          "buyer": "토요일 5시. 역 앞.",
+          "options": [
+            {
+              "text": "그냥 제 집으로 와주세요.",
+              "point": 0,
+              "reply": "…"
+            },
+            {
+              "text": "네, 토요일 5시 역 출구 앞이면 괜찮습니다.",
+              "point": 1,
+              "reply": "알겠습니다."
+            }
+          ]
+        },
+        {
+          "buyer": "당일엔 거래 외의 얘기 없이 끝내고 싶습니다.",
+          "options": [
+            {
+              "text": "그럼 대화도 하지 마세요.",
+              "point": 0,
+              "reply": "그건 어려울 것 같네요."
+            },
+            {
+              "text": "네, 물건 확인과 결제만 간단하게 진행할게요.",
+              "point": 1,
+              "reply": "…감사합니다. 구매하겠습니다."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "akira",
+      "name": "아키라",
+      "nick": "키캡수집가",
+      "hint": "제품 정보가 정확해야 마음이 놓이는 사람 같아. 잘 모르는 걸 아는 척하면 오히려 손해야. 확인한 사실과 모르는 부분을 분리해서 말해주면 좋겠어.",
+      "accent": "#d1e8df",
+      "hair": "#515c6e",
+      "hairStyle": "short",
+      "face": "⌨️",
+      "endOk": "확인했습니다. 기재한 조건대로 구매하겠습니다. 감사합니다.",
+      "endNo": "정보가 충분하지 않군요. 이번 거래는 보류하겠습니다.",
+      "itemId": "keycaps",
+      "difficulty": "보통",
+      "summary": "[임시 설정] 논리적이고 조용하며 애매한 표현을 싫어함.",
+      "profile": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj4KICAgIDxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iYmciPjxzdG9wIHN0b3AtY29sb3I9IiNmZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNkMWU4ZGYiLz48L3JhZGlhbEdyYWRpZW50PjxjbGlwUGF0aCBpZD0iY2xpcCI+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iODgiLz48L2NsaXBQYXRoPjwvZGVmcz4KICAgIDxjaXJjbGUgY3g9IjkwIiBjeT0iOTAiIHI9Ijg4IiBmaWxsPSJ1cmwoI2JnKSIvPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwKSI+CiAgICA8Y2lyY2xlIGN4PSIyOCIgY3k9IjMwIiByPSIyOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjM3Ii8+PGNpcmNsZSBjeD0iMTYyIiBjeT0iMTMyIiByPSI0MiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjIzIi8+CiAgICA8cGF0aCBkPSJNMTUgMTgyIFExNSAxMTggODQgMTIwIEwxMDIgMTIwIFExNjUgMTIwIDE2OSAxODIiIGZpbGw9IiM1MTVjNmUiIG9wYWNpdHk9Ii44Ii8+CiAgICA8cmVjdCB4PSI3NiIgeT0iMTExIiB3aWR0aD0iMjkiIGhlaWdodD0iMjQiIHJ4PSI5IiBmaWxsPSIjZWRjNmFjIi8+CiAgICA8ZWxsaXBzZSBjeD0iOTAiIGN5PSI4OSIgcng9IjQ4IiByeT0iNTMiIGZpbGw9IiNmNmQ1YmIiLz4KICAgIDxlbGxpcHNlIGN4PSI0MyIgY3k9Ijk1IiByeD0iNyIgcnk9IjEyIiBmaWxsPSIjZWRjNmFjIi8+PGVsbGlwc2UgY3g9IjEzNiIgY3k9Ijk1IiByeD0iNyIgcnk9IjEyIiBmaWxsPSIjZWRjNmFjIi8+CiAgICA8cGF0aCBkPSJNMzkgOTEgUTMyIDQzIDgzIDMzIFExNDUgMzEgMTM5IDkzIEwxMjEgNjkgUTkwIDc4IDYxIDY3WiIgZmlsbD0iIzUxNWM2ZSIvPgogICAgPHBhdGggZD0iTTY5IDk4IHE5IC02IDE3IDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzUzNTA1YiIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxwYXRoIGQ9Ik05OSA5OCBxOSAtNiAxNyAwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1MzUwNWIiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNODggMTEyIHE0IDQgOCAwIiBmaWxsPSJub25lIiBzdHJva2U9IiNiNzZjNzkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8Y2lyY2xlIGN4PSI1OSIgY3k9IjExMSIgcj0iNyIgZmlsbD0iI2VkOWVhYSIgb3BhY2l0eT0iLjI3Ii8+PGNpcmNsZSBjeD0iMTIxIiBjeT0iMTExIiByPSI3IiBmaWxsPSIjZWQ5ZWFhIiBvcGFjaXR5PSIuMjciLz4KICAgIDwvZz48Y2lyY2xlIGN4PSI5MCIgY3k9IjkwIiByPSI4NyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utb3BhY2l0eT0iLjkiIHN0cm9rZS13aWR0aD0iNCIvPgogICAgPGNpcmNsZSBjeD0iMTQ1IiBjeT0iMTM5IiByPSIyNyIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjk0Ii8+PHRleHQgeD0iMTQ1IiB5PSIxNDgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMjYiPuKMqO+4jzwvdGV4dD48L3N2Zz4=",
+      "steps": [
+        {
+          "buyer": "안녕하세요. 키캡 세트 구성이 정확히 몇 개입니까?",
+          "options": [
+            {
+              "text": "안녕하세요. 총 20개입니다.",
+              "point": 1,
+              "reply": "확인했습니다."
+            },
+            {
+              "text": "대략 20개쯤 될 거예요.",
+              "point": 0,
+              "reply": "수량이 불명확하군요."
+            },
+            {
+              "text": "그 정도는 중요하지 않죠.",
+              "point": 0,
+              "reply": "수량이 불명확하군요."
+            }
+          ]
+        },
+        {
+          "buyer": "일반 십자축 키보드에 맞나요?",
+          "options": [
+            {
+              "text": "제가 기계 쪽은 몰라서요.",
+              "point": 0,
+              "reply": "그 확답은 근거가 없어 보입니다."
+            },
+            {
+              "text": "네, 십자축용인데 기종별 호환성은 확인이 필요해요.",
+              "point": 1,
+              "reply": "그 정도 정보면 충분합니다."
+            },
+            {
+              "text": "모든 키보드에 무조건 맞습니다.",
+              "point": 0,
+              "reply": "그 확답은 근거가 없어 보입니다."
+            }
+          ]
+        },
+        {
+          "buyer": "사용 기간은요?",
+          "options": [
+            {
+              "text": "거의 새 거예요.",
+              "point": 0,
+              "reply": "기간이 정확하지 않네요."
+            },
+            {
+              "text": "그냥 오래 안 썼어요.",
+              "point": 0,
+              "reply": "기간이 정확하지 않네요."
+            },
+            {
+              "text": "약 3개월 사용했습니다.",
+              "point": 1,
+              "reply": "기록해두겠습니다."
+            }
+          ]
+        },
+        {
+          "buyer": "사진에서 왼쪽 끝 하나가 미세하게 까져 보입니다.",
+          "options": [
+            {
+              "text": "네, 해당 키캡 모서리에 작은 흠집이 있어요.",
+              "point": 1,
+              "reply": "사전에 알 수 있어 다행입니다."
+            },
+            {
+              "text": "사진이 이상한 겁니다.",
+              "point": 0,
+              "reply": "상태 설명이 부족합니다."
+            },
+            {
+              "text": "그건 신경 쓰지 마세요.",
+              "point": 0,
+              "reply": "상태 설명이 부족합니다."
+            }
+          ]
+        },
+        {
+          "buyer": "구성품에 뽑는 도구는 없나요?",
+          "options": [
+            {
+              "text": "원래는 있는 것 같아요.",
+              "point": 0,
+              "reply": "포함 여부가 불확실하네요."
+            },
+            {
+              "text": "없습니다. 키캡 20개만 판매합니다.",
+              "point": 1,
+              "reply": "알겠습니다."
+            },
+            {
+              "text": "아마 있을걸요.",
+              "point": 0,
+              "reply": "포함 여부가 불확실하네요."
+            }
+          ]
+        },
+        {
+          "buyer": "가격 11,000원에 변동 없습니까?",
+          "options": [
+            {
+              "text": "와서 흥정해봐요.",
+              "point": 0,
+              "reply": "예산을 정하기 어렵습니다."
+            },
+            {
+              "text": "가격은 지금 생각 중입니다.",
+              "point": 0,
+              "reply": "예산을 정하기 어렵습니다."
+            },
+            {
+              "text": "네, 게시한 11,000원 그대로입니다.",
+              "point": 1,
+              "reply": "명확하군요."
+            }
+          ]
+        },
+        {
+          "buyer": "제품에 이상이 있다면 현장에서 확인 가능합니까?",
+          "options": [
+            {
+              "text": "네, 육안으로 확인하시고 결정하셔도 됩니다.",
+              "point": 1,
+              "reply": "합리적인 조건입니다."
+            },
+            {
+              "text": "환불은 무조건 안 되니까 빨리 사세요.",
+              "point": 0,
+              "reply": "확인할 수 없으면 곤란합니다."
+            },
+            {
+              "text": "그냥 믿고 받으세요.",
+              "point": 0,
+              "reply": "확인할 수 없으면 곤란합니다."
+            }
+          ]
+        },
+        {
+          "buyer": "수요일 18시 거래 가능합니까?",
+          "options": [
+            {
+              "text": "대충 그때쯤 갈게요.",
+              "point": 0,
+              "reply": "약속 확정이 어렵군요."
+            },
+            {
+              "text": "네, 수요일 18시에 가능합니다.",
+              "point": 1,
+              "reply": "일정을 저장하겠습니다."
+            },
+            {
+              "text": "밤 11시만 됩니다.",
+              "point": 0,
+              "reply": "약속 확정이 어렵군요."
+            }
+          ]
+        },
+        {
+          "buyer": "장소는 구체적으로 어디가 좋습니까?",
+          "options": [
+            {
+              "text": "제가 사는 집 안으로 오세요.",
+              "point": 0,
+              "reply": "너무 불명확합니다."
+            },
+            {
+              "text": "근처 어딘가요.",
+              "point": 0,
+              "reply": "너무 불명확합니다."
+            },
+            {
+              "text": "역 1번 출구 앞 안내판 근처를 제안합니다.",
+              "point": 1,
+              "reply": "찾기 쉬운 장소입니다."
+            }
+          ]
+        },
+        {
+          "buyer": "약속 시간 변경 시 통보해주실 수 있죠?",
+          "options": [
+            {
+              "text": "네, 변경될 일이 생기면 미리 채팅하겠습니다.",
+              "point": 1,
+              "reply": "좋습니다. 거래하겠습니다."
+            },
+            {
+              "text": "그건 그때 생각하죠.",
+              "point": 0,
+              "reply": "조율이 어려울 것 같습니다."
+            },
+            {
+              "text": "변경은 마음대로 해도 되죠?",
+              "point": 0,
+              "reply": "조율이 어려울 것 같습니다."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "jiyun",
+      "name": "윤지윤",
+      "nick": "달토끼",
+      "hint": "상대는 확인하고 싶은 게 많지만 계속 미안해하고 있어. 답을 재촉하지 말고, 물건 상태와 약속을 천천히 구체적으로 설명해 줘. 상대가 편하게 거절할 여지도 주면 좋겠어.",
+      "accent": "#ddd9f1",
+      "hair": "#24233b",
+      "hairStyle": "long",
+      "face": "🌷",
+      "endOk": "네, 그럼 제가 구매할게요. 천천히 답해주셔서 감사합니다! 내일 도서관 앞에서 봬요.",
+      "endNo": "친절하게 답해주셨는데… 이번에는 조금 더 생각해볼게요. 죄송해요.",
+      "itemId": "rabbit",
+      "difficulty": "보통",
+      "summary": "조심스럽고 다정한 사람. 망설일 때 시간을 주면 마음을 연다.",
+      "profile": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj4KICAgIDxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iYmciPjxzdG9wIHN0b3AtY29sb3I9IiNmZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNkZGQ5ZjEiLz48L3JhZGlhbEdyYWRpZW50PjxjbGlwUGF0aCBpZD0iY2xpcCI+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iODgiLz48L2NsaXBQYXRoPjwvZGVmcz4KICAgIDxjaXJjbGUgY3g9IjkwIiBjeT0iOTAiIHI9Ijg4IiBmaWxsPSJ1cmwoI2JnKSIvPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwKSI+CiAgICA8Y2lyY2xlIGN4PSIyOCIgY3k9IjMwIiByPSIyOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjM3Ii8+PGNpcmNsZSBjeD0iMTYyIiBjeT0iMTMyIiByPSI0MiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjIzIi8+CiAgICA8cGF0aCBkPSJNMTUgMTgyIFExNSAxMTggODQgMTIwIEwxMDIgMTIwIFExNjUgMTIwIDE2OSAxODIiIGZpbGw9IiMyNDIzM2IiIG9wYWNpdHk9Ii44Ii8+CiAgICA8cmVjdCB4PSI3NiIgeT0iMTExIiB3aWR0aD0iMjkiIGhlaWdodD0iMjQiIHJ4PSI5IiBmaWxsPSIjZWRjNmFjIi8+CiAgICA8ZWxsaXBzZSBjeD0iOTAiIGN5PSI4OSIgcng9IjQ4IiByeT0iNTMiIGZpbGw9IiNmNmQ1YmIiLz4KICAgIDxlbGxpcHNlIGN4PSI0MyIgY3k9Ijk1IiByeD0iNyIgcnk9IjEyIiBmaWxsPSIjZWRjNmFjIi8+PGVsbGlwc2UgY3g9IjEzNiIgY3k9Ijk1IiByeD0iNyIgcnk9IjEyIiBmaWxsPSIjZWRjNmFjIi8+CiAgICA8cGF0aCBkPSJNNDYgODEgUTQyIDM2IDkyIDM1IFExNDMgMzEgMTM3IDg0IEwxNDIgMTYxIEwzMiAxNjFaIiBmaWxsPSIjMjQyMzNiIi8+PHBhdGggZD0iTTQwIDg4IFE0MSA0MyA5MSAzNiBRMTQ0IDM3IDEzOSA4NiBRMTE5IDY3IDEwNSA1NiBRNzkgODAgNDMgODJaIiBmaWxsPSIjMjQyMzNiIi8+CiAgICA8cGF0aCBkPSJNNjkgOTggcTkgLTYgMTcgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTM1MDViIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTk5IDk4IHE5IC02IDE3IDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzUzNTA1YiIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxwYXRoIGQ9Ik04OCAxMTIgcTQgNCA4IDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2I3NmM3OSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxjaXJjbGUgY3g9IjU5IiBjeT0iMTExIiByPSI3IiBmaWxsPSIjZWQ5ZWFhIiBvcGFjaXR5PSIuMjciLz48Y2lyY2xlIGN4PSIxMjEiIGN5PSIxMTEiIHI9IjciIGZpbGw9IiNlZDllYWEiIG9wYWNpdHk9Ii4yNyIvPgogICAgPC9nPjxjaXJjbGUgY3g9IjkwIiBjeT0iOTAiIHI9Ijg3IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1vcGFjaXR5PSIuOSIgc3Ryb2tlLXdpZHRoPSI0Ii8+CiAgICA8Y2lyY2xlIGN4PSIxNDUiIGN5PSIxMzkiIHI9IjI3IiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuOTQiLz48dGV4dCB4PSIxNDUiIHk9IjE0OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIyNiI+8J+MtzwvdGV4dD48L3N2Zz4=",
+      "steps": [
+        {
+          "buyer": "안녕하세요… 토끼 키링 아직 판매하시나요?",
+          "options": [
+            {
+              "text": "안녕하세요! 네, 아직 판매 중입니다.",
+              "point": 1,
+              "reply": "아, 다행이에요."
+            },
+            {
+              "text": "네. 빨리 정해주세요.",
+              "point": 0,
+              "reply": "앗, 알겠습니다…"
+            },
+            {
+              "text": "네. 현재 예약자는 없고, 내일쯤 거래하실 수 있을 것 같아요.",
+              "point": 0,
+              "reply": "아, 제가 가능한 시간부터 확인해야겠어요."
+            }
+          ]
+        },
+        {
+          "buyer": "사진에 보이는 작은 리본도 같이 오는 거죠?",
+          "options": [
+            {
+              "text": "리본은 달려 있어요. 상태는 직접 보시면 더 좋겠네요.",
+              "point": 0,
+              "reply": "포함인지 먼저 확인하고 싶었어요…"
+            },
+            {
+              "text": "네, 리본까지 포함된 구성입니다.",
+              "point": 1,
+              "reply": "그게 제일 귀여워서요."
+            },
+            {
+              "text": "사진 보셨잖아요.",
+              "point": 0,
+              "reply": "아… 다시 확인해볼게요."
+            }
+          ]
+        },
+        {
+          "buyer": "혹시 가까이 찍은 사진도 볼 수 있을까요?",
+          "options": [
+            {
+              "text": "굳이요? 멀쩡해요.",
+              "point": 0,
+              "reply": "그럼 지금 사진으로 판단해야겠네요."
+            },
+            {
+              "text": "사진은 지금 있는 것으로 충분할 거예요. 믿어주세요.",
+              "point": 0,
+              "reply": "자세히 볼 수 없어서 좀 고민되네요."
+            },
+            {
+              "text": "네, 리본 부분도 잘 보이도록 추가해둘게요.",
+              "point": 1,
+              "reply": "정말 감사합니다."
+            }
+          ]
+        },
+        {
+          "buyer": "제가 이런 거래는 처음이라… 좀 느려도 괜찮을까요?",
+          "options": [
+            {
+              "text": "저도 익숙하지 않아요. 편하게 물어보세요.",
+              "point": 1,
+              "reply": "어쩐지 조금 안심되네요."
+            },
+            {
+              "text": "처음이면 다른 분 찾으세요.",
+              "point": 0,
+              "reply": "죄송해요. 괜히 여쭤봤네요."
+            },
+            {
+              "text": "저도 처음이니까 빨리 정하고 끝내면 좋겠어요.",
+              "point": 0,
+              "reply": "아… 너무 서두르지는 않아도 되는데…"
+            }
+          ]
+        },
+        {
+          "buyer": "키링에 얼룩이나 하자는 없나요?",
+          "options": [
+            {
+              "text": "겉으로는 멀쩡해 보여요. 자세히는 잘 모르겠어요.",
+              "point": 0,
+              "reply": "상태를 조금 더 확인하고 싶었어요."
+            },
+            {
+              "text": "사용감은 조금 있지만 얼룩이나 찢김은 없어요.",
+              "point": 1,
+              "reply": "상태를 솔직히 알려주셔서 좋아요."
+            },
+            {
+              "text": "없다고 치면 되죠.",
+              "point": 0,
+              "reply": "음… 상태가 걱정되네요."
+            }
+          ]
+        },
+        {
+          "buyer": "혹시 가격은 4천 원 그대로인가요?",
+          "options": [
+            {
+              "text": "갑자기 5천 원으로 올릴게요.",
+              "point": 0,
+              "reply": "아… 생각한 조건이 달라졌네요."
+            },
+            {
+              "text": "4천 원인데 시간에 따라 가격이 바뀔 수도 있어요.",
+              "point": 0,
+              "reply": "그럼 가격이 확정된 건 아닌가요?"
+            },
+            {
+              "text": "네, 게시한 가격 그대로예요.",
+              "point": 1,
+              "reply": "알겠습니다!"
+            }
+          ]
+        },
+        {
+          "buyer": "제가 버스 타고 가야 해서, 약속 장소를 미리 알 수 있을까요?",
+          "options": [
+            {
+              "text": "동네 도서관 정문 앞은 어떠세요?",
+              "point": 1,
+              "reply": "거기면 찾기 쉽겠어요."
+            },
+            {
+              "text": "집 앞까지 오시면 돼요.",
+              "point": 0,
+              "reply": "그건 조금 불안하네요…"
+            },
+            {
+              "text": "동네 어딘가에서 만나요. 그때 정해도 되죠?",
+              "point": 0,
+              "reply": "미리 정해야 버스를 탈 수 있는데…"
+            }
+          ]
+        },
+        {
+          "buyer": "혹시 사람이 많은 곳이어도 괜찮으세요?",
+          "options": [
+            {
+              "text": "괜찮긴 한데 사람 많으면 빨리 끝내주세요.",
+              "point": 0,
+              "reply": "네… 그래도 급하게 하진 않았으면 해요."
+            },
+            {
+              "text": "네, 도서관 앞이면 밝고 사람도 많아서 좋아요.",
+              "point": 1,
+              "reply": "저도 그게 편해요."
+            },
+            {
+              "text": "아무도 없는 골목이 편한데요.",
+              "point": 0,
+              "reply": "음, 저는 그런 곳은 무서워서요."
+            }
+          ]
+        },
+        {
+          "buyer": "시간은 내일 4시쯤 어떠세요?",
+          "options": [
+            {
+              "text": "오늘 당장 아니면 안 돼요.",
+              "point": 0,
+              "reply": "다른 일정이 있어서 어려울 것 같아요."
+            },
+            {
+              "text": "4시쯤이면 괜찮을 것 같아요. 정확한 시간은 나중에요.",
+              "point": 0,
+              "reply": "시간이 확실하지 않아서 조금 걱정돼요."
+            },
+            {
+              "text": "네, 내일 4시에 도서관 앞에서 뵐게요.",
+              "point": 1,
+              "reply": "네! 일정에 적어둘게요."
+            }
+          ]
+        },
+        {
+          "buyer": "마지막으로… 제가 물건 보고 결정해도 될까요?",
+          "options": [
+            {
+              "text": "물론이죠. 직접 확인하고 결정하셔도 괜찮아요.",
+              "point": 1,
+              "reply": "감사합니다. 마음이 놓였어요."
+            },
+            {
+              "text": "보시면 무조건 사셔야 해요.",
+              "point": 0,
+              "reply": "그렇게는 조금 부담스러워요."
+            },
+            {
+              "text": "보셔도 되는데 가능하면 바로 결정해주세요.",
+              "point": 0,
+              "reply": "제가 천천히 확인할 시간이 필요해서요…"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dan",
+      "name": "선우 단",
+      "nick": "정확한거래",
+      "hint": "상대는 까다로운 게 아니라 조건이 바뀌는 걸 싫어할지도 몰라. 감정적으로 설득하기보단 가격·시간·장소·상태를 정확히 확인하고, 약속을 지키겠다는 태도를 보여줘.",
+      "accent": "#f3dfce",
+      "hair": "#695444",
+      "hairStyle": "side",
+      "face": "♟️",
+      "endOk": "좋아. 조건이 일관적이네. 거래 진행할게.",
+      "endNo": "조건이 안 맞아서 패스할게.",
+      "itemId": "sleeves",
+      "difficulty": "어려움",
+      "summary": "[임시 설정] 규칙적이고 다소 까다로우며 공정한 조건을 선호함.",
+      "profile": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj4KICAgIDxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iYmciPjxzdG9wIHN0b3AtY29sb3I9IiNmZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmM2RmY2UiLz48L3JhZGlhbEdyYWRpZW50PjxjbGlwUGF0aCBpZD0iY2xpcCI+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iODgiLz48L2NsaXBQYXRoPjwvZGVmcz4KICAgIDxjaXJjbGUgY3g9IjkwIiBjeT0iOTAiIHI9Ijg4IiBmaWxsPSJ1cmwoI2JnKSIvPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwKSI+CiAgICA8Y2lyY2xlIGN4PSIyOCIgY3k9IjMwIiByPSIyOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjM3Ii8+PGNpcmNsZSBjeD0iMTYyIiBjeT0iMTMyIiByPSI0MiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjIzIi8+CiAgICA8cGF0aCBkPSJNMTUgMTgyIFExNSAxMTggODQgMTIwIEwxMDIgMTIwIFExNjUgMTIwIDE2OSAxODIiIGZpbGw9IiM2OTU0NDQiIG9wYWNpdHk9Ii44Ii8+CiAgICA8cmVjdCB4PSI3NiIgeT0iMTExIiB3aWR0aD0iMjkiIGhlaWdodD0iMjQiIHJ4PSI5IiBmaWxsPSIjZWRjNmFjIi8+CiAgICA8ZWxsaXBzZSBjeD0iOTAiIGN5PSI4OSIgcng9IjQ4IiByeT0iNTMiIGZpbGw9IiNmNmQ1YmIiLz4KICAgIDxlbGxpcHNlIGN4PSI0MyIgY3k9Ijk1IiByeD0iNyIgcnk9IjEyIiBmaWxsPSIjZWRjNmFjIi8+PGVsbGlwc2UgY3g9IjEzNiIgY3k9Ijk1IiByeD0iNyIgcnk9IjEyIiBmaWxsPSIjZWRjNmFjIi8+CiAgICA8cGF0aCBkPSJNMzggOTkgUTI1IDQ0IDc1IDM1IFExNDMgMjggMTQxIDkzIFExMjMgNzQgMTA2IDUzIFE4MCA3NSAzNyA5MFoiIGZpbGw9IiM2OTU0NDQiLz4KICAgIDxwYXRoIGQ9Ik02OSA5OCBxOSAtNiAxNyAwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1MzUwNWIiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNOTkgOTggcTkgLTYgMTcgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTM1MDViIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTg4IDExMiBxNCA0IDggMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjc2Yzc5IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPGNpcmNsZSBjeD0iNTkiIGN5PSIxMTEiIHI9IjciIGZpbGw9IiNlZDllYWEiIG9wYWNpdHk9Ii4yNyIvPjxjaXJjbGUgY3g9IjEyMSIgY3k9IjExMSIgcj0iNyIgZmlsbD0iI2VkOWVhYSIgb3BhY2l0eT0iLjI3Ii8+CiAgICA8L2c+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iODciIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii45IiBzdHJva2Utd2lkdGg9IjQiLz4KICAgIDxjaXJjbGUgY3g9IjE0NSIgY3k9IjEzOSIgcj0iMjciIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii45NCIvPjx0ZXh0IHg9IjE0NSIgeT0iMTQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI2Ij7imZ/vuI88L3RleHQ+PC9zdmc+",
+      "steps": [
+        {
+          "buyer": "카드 슬리브 100매 세트 맞지?",
+          "options": [
+            {
+              "text": "직접 세어보세요.",
+              "point": 0,
+              "reply": "그건 좀 애매하네."
+            },
+            {
+              "text": "네, 미개봉 100매 한 묶음입니다.",
+              "point": 1,
+              "reply": "좋아."
+            },
+            {
+              "text": "100매쯤 되지 않을까요?",
+              "point": 0,
+              "reply": "그건 좀 애매하네."
+            }
+          ]
+        },
+        {
+          "buyer": "개봉 흔적은 없고?",
+          "options": [
+            {
+              "text": "아마 없을 거예요.",
+              "point": 0,
+              "reply": "신뢰가 잘 안 가는데."
+            },
+            {
+              "text": "그 정도는 상관없잖아요.",
+              "point": 0,
+              "reply": "신뢰가 잘 안 가는데."
+            },
+            {
+              "text": "봉인 스티커 그대로 붙어 있어요.",
+              "point": 1,
+              "reply": "확인했어."
+            }
+          ]
+        },
+        {
+          "buyer": "가격에 배송비도 포함이야?",
+          "options": [
+            {
+              "text": "직거래 가격 6,500원이고 배송은 하지 않아요.",
+              "point": 1,
+              "reply": "조건 명확하네."
+            },
+            {
+              "text": "그건 알아서 생각해.",
+              "point": 0,
+              "reply": "거래 방식이 불명확하네."
+            },
+            {
+              "text": "택배도 되겠죠 뭐.",
+              "point": 0,
+              "reply": "거래 방식이 불명확하네."
+            }
+          ]
+        },
+        {
+          "buyer": "네가 먼저 6천 원으로 깎으면 바로 산다. 어때?",
+          "options": [
+            {
+              "text": "안 깎아드려요. 너무하시네요.",
+              "point": 0,
+              "reply": "그렇게 갑자기 흔들리면 나도 고민되는데."
+            },
+            {
+              "text": "가격은 6,500원으로 정했어요. 부담되면 괜찮습니다.",
+              "point": 1,
+              "reply": "음, 원칙 있네."
+            },
+            {
+              "text": "네, 무조건 6천 원에 드릴게요!",
+              "point": 0,
+              "reply": "그렇게 갑자기 흔들리면 나도 고민되는데."
+            }
+          ]
+        },
+        {
+          "buyer": "그러면 가격은 고정이라는 거네.",
+          "options": [
+            {
+              "text": "그때 가서 바꿀 수도 있어요.",
+              "point": 0,
+              "reply": "그건 불안한데."
+            },
+            {
+              "text": "대신 다른 걸 더 사세요.",
+              "point": 0,
+              "reply": "그건 불안한데."
+            },
+            {
+              "text": "네, 현재는 6,500원으로 생각하고 있어요.",
+              "point": 1,
+              "reply": "좋아."
+            }
+          ]
+        },
+        {
+          "buyer": "사진에 있는 투명 케이스도 주는 거지?",
+          "options": [
+            {
+              "text": "아니요, 촬영용 소품입니다. 슬리브만 판매해요.",
+              "point": 1,
+              "reply": "확실히 알려줘서 다행."
+            },
+            {
+              "text": "네, 사진 속 물건 전부요.",
+              "point": 0,
+              "reply": "그럼 글에 더 정확히 적어야겠네."
+            },
+            {
+              "text": "그건 그냥 두고 가세요.",
+              "point": 0,
+              "reply": "그럼 글에 더 정확히 적어야겠네."
+            }
+          ]
+        },
+        {
+          "buyer": "하자 있으면 거래 전에 말해줄 거야?",
+          "options": [
+            {
+              "text": "그런 일은 절대 없어요.",
+              "point": 0,
+              "reply": "약속을 믿기 어렵네."
+            },
+            {
+              "text": "네, 발견되면 바로 채팅으로 알려드리겠습니다.",
+              "point": 1,
+              "reply": "그럼 됐어."
+            },
+            {
+              "text": "당일엔 그냥 넘어가죠.",
+              "point": 0,
+              "reply": "약속을 믿기 어렵네."
+            }
+          ]
+        },
+        {
+          "buyer": "저녁엔 사람이 많으니 일찍 만나는 게 낫지 않을까.",
+          "options": [
+            {
+              "text": "다른 사람 없을 때 만나죠.",
+              "point": 0,
+              "reply": "조건을 맞추기 힘들겠네."
+            },
+            {
+              "text": "왜 사람이 많으면 안 되는데요?",
+              "point": 0,
+              "reply": "조건을 맞추기 힘들겠네."
+            },
+            {
+              "text": "그럼 오후 4시로 조정할까요?",
+              "point": 1,
+              "reply": "오케이."
+            }
+          ]
+        },
+        {
+          "buyer": "장소는 문화센터 정문. 괜찮아?",
+          "options": [
+            {
+              "text": "네, 정문 안내판 앞에서 기다리겠습니다.",
+              "point": 1,
+              "reply": "좋아."
+            },
+            {
+              "text": "건물 안 아무 데서나요.",
+              "point": 0,
+              "reply": "너무 불확실해."
+            },
+            {
+              "text": "그냥 다른 곳으로 오세요.",
+              "point": 0,
+              "reply": "너무 불확실해."
+            }
+          ]
+        },
+        {
+          "buyer": "마지막 확인. 4시, 정문, 6천5백 원.",
+          "options": [
+            {
+              "text": "지금은 7천 원인데요.",
+              "point": 0,
+              "reply": "아, 이러면 좀 곤란하지."
+            },
+            {
+              "text": "네, 말씀하신 세 가지가 모두 맞습니다.",
+              "point": 1,
+              "reply": "그럼 구매할게."
+            },
+            {
+              "text": "아마 맞을걸요?",
+              "point": 0,
+              "reply": "아, 이러면 좀 곤란하지."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "koshin",
+      "name": "코신",
+      "nick": "탈색은계획적",
+      "hint": "이 사람은 계속 장난으로 반응을 떠보네. 농담은 짧게 받아주되 물건 상태에선 절대 허세 부리지 마. 지나치게 방어적이거나 너무 친한 척하는 것도 피하는 편이 좋겠어.",
+      "accent": "#e8dfcc",
+      "hair": "#e3cd93",
+      "hairStyle": "messy",
+      "face": "🦊",
+      "endOk": "ㅋㅋㅋ 재밌네. 괜찮은 판매자잖아? 헤드셋 거치대 내가 산다.",
+      "endNo": "오케이~ 웃겼다. 근데 구매는 패스할게 ㅋㅋ",
+      "itemId": "headset",
+      "difficulty": "어려움",
+      "summary": "장난스럽고 능청스럽지만 눈치가 빠름. 상대가 어설프게 거짓말하는 것을 바로 파악함.",
+      "profile": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj4KICAgIDxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iYmciPjxzdG9wIHN0b3AtY29sb3I9IiNmZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlOGRmY2MiLz48L3JhZGlhbEdyYWRpZW50PjxjbGlwUGF0aCBpZD0iY2xpcCI+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iODgiLz48L2NsaXBQYXRoPjwvZGVmcz4KICAgIDxjaXJjbGUgY3g9IjkwIiBjeT0iOTAiIHI9Ijg4IiBmaWxsPSJ1cmwoI2JnKSIvPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwKSI+CiAgICA8Y2lyY2xlIGN4PSIyOCIgY3k9IjMwIiByPSIyOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjM3Ii8+PGNpcmNsZSBjeD0iMTYyIiBjeT0iMTMyIiByPSI0MiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjIzIi8+CiAgICA8cGF0aCBkPSJNMTUgMTgyIFExNSAxMTggODQgMTIwIEwxMDIgMTIwIFExNjUgMTIwIDE2OSAxODIiIGZpbGw9IiNlM2NkOTMiIG9wYWNpdHk9Ii44Ii8+CiAgICA8cmVjdCB4PSI3NiIgeT0iMTExIiB3aWR0aD0iMjkiIGhlaWdodD0iMjQiIHJ4PSI5IiBmaWxsPSIjZWRjNmFjIi8+CiAgICA8ZWxsaXBzZSBjeD0iOTAiIGN5PSI4OSIgcng9IjQ4IiByeT0iNTMiIGZpbGw9IiNmNmQ1YmIiLz4KICAgIDxlbGxpcHNlIGN4PSI0MyIgY3k9Ijk1IiByeD0iNyIgcnk9IjEyIiBmaWxsPSIjZWRjNmFjIi8+PGVsbGlwc2UgY3g9IjEzNiIgY3k9Ijk1IiByeD0iNyIgcnk9IjEyIiBmaWxsPSIjZWRjNmFjIi8+CiAgICA8cGF0aCBkPSJNMzAgOTMgTDQzIDU0IEw1MyA2MyBMNjUgMjcgTDgwIDQ2IEwxMDMgMjQgTDExMyA0MyBMMTM5IDM2IEwxMzQgNjQgTDE1MSA3OCBMMTMzIDk1IEwxMTcgNzUgTDg2IDY5IEw1NiA4MloiIGZpbGw9IiNlM2NkOTMiLz4KICAgIDxwYXRoIGQ9Ik02OSA5OCBxOSAtNiAxNyAwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1MzUwNWIiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNOTkgOTggcTkgLTYgMTcgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTM1MDViIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTg4IDExMiBxNCA0IDggMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjc2Yzc5IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPGNpcmNsZSBjeD0iNTkiIGN5PSIxMTEiIHI9IjciIGZpbGw9IiNlZDllYWEiIG9wYWNpdHk9Ii4yNyIvPjxjaXJjbGUgY3g9IjEyMSIgY3k9IjExMSIgcj0iNyIgZmlsbD0iI2VkOWVhYSIgb3BhY2l0eT0iLjI3Ii8+CiAgICA8L2c+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iODciIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii45IiBzdHJva2Utd2lkdGg9IjQiLz4KICAgIDxjaXJjbGUgY3g9IjE0NSIgY3k9IjEzOSIgcj0iMjciIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii45NCIvPjx0ZXh0IHg9IjE0NSIgeT0iMTQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI2Ij7wn6aKPC90ZXh0Pjwvc3ZnPg==",
+      "steps": [
+        {
+          "buyer": "안녕 판매자님~ 이 거치대 아직 살아 있나?",
+          "options": [
+            {
+              "text": "네 ㅎㅎ 아직 판매 중이에요.",
+              "point": 1,
+              "reply": "오 대답도 빠르네."
+            },
+            {
+              "text": "아, 왜 그렇게 말씀하세요 ㅋㅋ 조금 당황스럽네요.",
+              "point": 0,
+              "reply": "헉 내가 너무 웃겼나?"
+            },
+            {
+              "text": "네, 남아 있긴 한데 구매 확실하시면 답할게요.",
+              "point": 0,
+              "reply": "헉 내가 너무 웃겼나?"
+            }
+          ]
+        },
+        {
+          "buyer": "헤드셋 올리면 안 넘어지지? 내 거 무거운데.",
+          "options": [
+            {
+              "text": "일반 헤드셋은 괜찮았어요. 무거워도 아마 문제 없을 듯해요.",
+              "point": 0,
+              "reply": "흐음 그 말은 못 믿겠어."
+            },
+            {
+              "text": "일반 헤드셋은 괜찮았지만, 무게에 따라 다를 수 있어요.",
+              "point": 1,
+              "reply": "현실적인 답이네."
+            },
+            {
+              "text": "너무 무거우면 바닥에 고정해서 쓰시면 될 거예요.",
+              "point": 0,
+              "reply": "흐음 그 말은 못 믿겠어."
+            }
+          ]
+        },
+        {
+          "buyer": "설마 사진만 예쁘게 찍고 실물은 삐걱?ㅋㅋ",
+          "options": [
+            {
+              "text": "사진에는 큰 문제 없어 보여요. 실물도 비슷할 거예요.",
+              "point": 0,
+              "reply": "농담이었는데 반응이 이상하네."
+            },
+            {
+              "text": "사진만 잘 나온 건 아니고 상태는 좋아요 ㅋㅋ",
+              "point": 0,
+              "reply": "농담이었는데 반응이 이상하네."
+            },
+            {
+              "text": "작은 사용감은 있지만 흔들림은 없어요.",
+              "point": 1,
+              "reply": "오호, 체크."
+            }
+          ]
+        },
+        {
+          "buyer": "근데 내 닉네임 멋있지 않아?",
+          "options": [
+            {
+              "text": "기억에 남는 닉네임이네요 ㅋㅋ",
+              "point": 1,
+              "reply": "ㅋㅋㅋ 센스 있네."
+            },
+            {
+              "text": "ㅋㅋ 닉네임 보고 아는 사람인 줄 알았어요.",
+              "point": 0,
+              "reply": "갑자기 신상 질문은 좀."
+            },
+            {
+              "text": "탈색 좋아하세요? 혹시 어디 사세요?",
+              "point": 0,
+              "reply": "갑자기 신상 질문은 좀."
+            }
+          ]
+        },
+        {
+          "buyer": "너무 착하게만 말하면 나 의심해도 됨?",
+          "options": [
+            {
+              "text": "서로 믿고 거래하는 거잖아요. 의심하시면 좀 서운할지도…",
+              "point": 0,
+              "reply": "흠… 뭔가 안 맞는데."
+            },
+            {
+              "text": "의심하실 수 있죠. 궁금한 건 확인해드릴게요.",
+              "point": 1,
+              "reply": "뭐야, 덤덤한데 강하네."
+            },
+            {
+              "text": "저 되게 착한 편이긴 한데요 ㅎㅎ",
+              "point": 0,
+              "reply": "흠… 뭔가 안 맞는데."
+            }
+          ]
+        },
+        {
+          "buyer": "바닥에 긁힌 자국, 사진 확대하니까 보이던데?",
+          "options": [
+            {
+              "text": "그 정도 흠집은 거의 안 보여서 따로 말씀 안 드렸어요.",
+              "point": 0,
+              "reply": "거짓말은 티 나거든."
+            },
+            {
+              "text": "사진에 잘 안 보였는데 실물도 괜찮을 것 같아요.",
+              "point": 0,
+              "reply": "거짓말은 티 나거든."
+            },
+            {
+              "text": "네, 바닥 쪽에 잔흠집이 있어요. 사용에는 문제없습니다.",
+              "point": 1,
+              "reply": "와 숨기지 않네."
+            }
+          ]
+        },
+        {
+          "buyer": "9천 원? 8천 원이면 바로 찜.",
+          "options": [
+            {
+              "text": "가격은 9천 원이에요. 대신 상태는 충분히 확인하고 결정하세요.",
+              "point": 1,
+              "reply": "협상엔 안 넘어가네?ㅋㅋ"
+            },
+            {
+              "text": "8천 원은 좀 그렇고, 만나서 다시 얘기하시죠.",
+              "point": 0,
+              "reply": "어, 갑자기 분위기 이상해."
+            },
+            {
+              "text": "가격 조정은 생각 안 했는데 이번만 특별히 해드릴까요?",
+              "point": 0,
+              "reply": "어, 갑자기 분위기 이상해."
+            }
+          ]
+        },
+        {
+          "buyer": "내일 밤 10시에 조용한 골목에서 보면 낭만적이지 않나.",
+          "options": [
+            {
+              "text": "밤은 너무 늦으니 8시에 골목 입구에서 볼까요?",
+              "point": 0,
+              "reply": "에이, 그건 좀 위험하지."
+            },
+            {
+              "text": "ㅎㅎ 거래는 낮에 사람 많은 곳에서 하는 게 좋겠어요.",
+              "point": 1,
+              "reply": "오, 현명. 나도 그쪽이 좋아."
+            },
+            {
+              "text": "낭만 좋네요 ㅎㅎ 조용한 카페 뒷문에서 만나요.",
+              "point": 0,
+              "reply": "에이, 그건 좀 위험하지."
+            }
+          ]
+        },
+        {
+          "buyer": "그럼 오후 3시, 편의점 앞? 혹시 나 얼굴 보고 도망가는 거 아냐?",
+          "options": [
+            {
+              "text": "3시쯤 갈 수 있을 것 같아요. 출발하면 연락드릴게요.",
+              "point": 0,
+              "reply": "갑자기 거래가 무섭다?"
+            },
+            {
+              "text": "네, 혹시 얼굴 사진 먼저 보내주시면 알아보기가 좋을 것 같아요.",
+              "point": 0,
+              "reply": "갑자기 거래가 무섭다?"
+            },
+            {
+              "text": "3시 좋아요. 물건 들고 약속 장소에서 기다릴게요.",
+              "point": 1,
+              "reply": "그 정도면 믿을게."
+            }
+          ]
+        },
+        {
+          "buyer": "마지막! 팔기 싫어지면 솔직히 말할 거지?",
+          "options": [
+            {
+              "text": "네, 변동이 생기면 미리 말씀드릴게요.",
+              "point": 1,
+              "reply": "ㅋㅋ 그래. 그럼 내가 살게."
+            },
+            {
+              "text": "마음이 바뀌면 그때 말씀드릴게요. 너무 걱정하지 마세요.",
+              "point": 0,
+              "reply": "에이, 그런 반응은 별로다."
+            },
+            {
+              "text": "그럴 일은 없어야죠 ㅎㅎ 일단 오시면 됩니다.",
+              "point": 0,
+              "reply": "에이, 그런 반응은 별로다."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rico",
+      "name": "리코",
+      "nick": "반짝이주의",
+      "hint": "말투만 보면 화난 것 같지만, 사실 물건 상태랑 조건을 명확하게 알고 싶은 거야. 쫄아서 비굴하게 굴거나 맞받아치지 말고, 짧고 당당하게 사실만 이야기해 봐.",
+      "accent": "#ffdae7",
+      "hair": "#bc6e75",
+      "hairStyle": "ponytail",
+      "face": "💄",
+      "endOk": "오, 말 통하네. 그럼 내가 살게. 토요일에 보자.",
+      "endNo": "에휴, 조건이 안 맞네. 거래는 안 할게.",
+      "itemId": "pins",
+      "difficulty": "극악",
+      "summary": "말이 직설적이고 성격이 강함. 과한 비위 맞춤보다 솔직하고 깔끔한 답을 선호.",
+      "profile": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj4KICAgIDxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iYmciPjxzdG9wIHN0b3AtY29sb3I9IiNmZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmRhZTciLz48L3JhZGlhbEdyYWRpZW50PjxjbGlwUGF0aCBpZD0iY2xpcCI+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iODgiLz48L2NsaXBQYXRoPjwvZGVmcz4KICAgIDxjaXJjbGUgY3g9IjkwIiBjeT0iOTAiIHI9Ijg4IiBmaWxsPSJ1cmwoI2JnKSIvPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwKSI+CiAgICA8Y2lyY2xlIGN4PSIyOCIgY3k9IjMwIiByPSIyOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjM3Ii8+PGNpcmNsZSBjeD0iMTYyIiBjeT0iMTMyIiByPSI0MiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjIzIi8+CiAgICA8cGF0aCBkPSJNMTUgMTgyIFExNSAxMTggODQgMTIwIEwxMDIgMTIwIFExNjUgMTIwIDE2OSAxODIiIGZpbGw9IiNiYzZlNzUiIG9wYWNpdHk9Ii44Ii8+CiAgICA8cmVjdCB4PSI3NiIgeT0iMTExIiB3aWR0aD0iMjkiIGhlaWdodD0iMjQiIHJ4PSI5IiBmaWxsPSIjZWRjNmFjIi8+CiAgICA8ZWxsaXBzZSBjeD0iOTAiIGN5PSI4OSIgcng9IjQ4IiByeT0iNTMiIGZpbGw9IiNmNmQ1YmIiLz4KICAgIDxlbGxpcHNlIGN4PSI0MyIgY3k9Ijk1IiByeD0iNyIgcnk9IjEyIiBmaWxsPSIjZWRjNmFjIi8+PGVsbGlwc2UgY3g9IjEzNiIgY3k9Ijk1IiByeD0iNyIgcnk9IjEyIiBmaWxsPSIjZWRjNmFjIi8+CiAgICA8ZWxsaXBzZSBjeD0iMTMxIiBjeT0iNjYiIHJ4PSIyNCIgcnk9IjM4IiBmaWxsPSIjYmM2ZTc1Ii8+PHBhdGggZD0iTTQ1IDg5IFEzMyA0MSA5MCAzMyBRMTQzIDMzIDEzNiA4OCBRMTEyIDY4IDk4IDUwIFE3NyA3NSA0NSA4OVoiIGZpbGw9IiNiYzZlNzUiLz4KICAgIDxwYXRoIGQ9Ik02OSA5OCBxOSAtNiAxNyAwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1MzUwNWIiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNOTkgOTggcTkgLTYgMTcgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTM1MDViIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTg4IDExMiBxNCA0IDggMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjc2Yzc5IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPGNpcmNsZSBjeD0iNTkiIGN5PSIxMTEiIHI9IjciIGZpbGw9IiNlZDllYWEiIG9wYWNpdHk9Ii4yNyIvPjxjaXJjbGUgY3g9IjEyMSIgY3k9IjExMSIgcj0iNyIgZmlsbD0iI2VkOWVhYSIgb3BhY2l0eT0iLjI3Ii8+CiAgICA8L2c+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iODciIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii45IiBzdHJva2Utd2lkdGg9IjQiLz4KICAgIDxjaXJjbGUgY3g9IjE0NSIgY3k9IjEzOSIgcj0iMjciIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii45NCIvPjx0ZXh0IHg9IjE0NSIgeT0iMTQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI2Ij7wn5KEPC90ZXh0Pjwvc3ZnPg==",
+      "steps": [
+        {
+          "buyer": "핀 아직 있어? 사진엔 멀쩡해 보이는데.",
+          "options": [
+            {
+              "text": "최고급이라 흠 하나 없어요.",
+              "point": 0,
+              "reply": "그건 좀 믿기 어려운데."
+            },
+            {
+              "text": "네, 아직 있어요. 실제 상태도 사진과 같아요.",
+              "point": 1,
+              "reply": "흠, 일단 확인."
+            },
+            {
+              "text": "말투가 왜 그러세요?",
+              "point": 0,
+              "reply": "그건 좀 믿기 어려운데."
+            }
+          ]
+        },
+        {
+          "buyer": "저거 실버색이지? 변색한 거 아니고?",
+          "options": [
+            {
+              "text": "그걸 왜 묻지?",
+              "point": 0,
+              "reply": "에휴, 그렇게 말하면 못 믿지."
+            },
+            {
+              "text": "아예 새 상품이에요.",
+              "point": 0,
+              "reply": "에휴, 그렇게 말하면 못 믿지."
+            },
+            {
+              "text": "실버색이고, 가까이 보면 작은 생활흠집만 있어요.",
+              "point": 1,
+              "reply": "솔직하네. 좋아."
+            }
+          ]
+        },
+        {
+          "buyer": "개별로 말고 세트 맞아?",
+          "options": [
+            {
+              "text": "네, 헤어핀 세 개 한 세트로 판매해요.",
+              "point": 1,
+              "reply": "오케이."
+            },
+            {
+              "text": "사진 보고 알아서 판단해.",
+              "point": 0,
+              "reply": "설명이 왔다 갔다 하네."
+            },
+            {
+              "text": "한 개만 드릴 수도요.",
+              "point": 0,
+              "reply": "설명이 왔다 갔다 하네."
+            }
+          ]
+        },
+        {
+          "buyer": "다른 사람이 산다고 하면 나한테 먼저 말해줄 거야?",
+          "options": [
+            {
+              "text": "일단 돈부터 보내세요.",
+              "point": 0,
+              "reply": "그건 좀 부담스럽거나 수상한데?"
+            },
+            {
+              "text": "지금 대화 중인 동안은 변경되면 먼저 알려드릴게요.",
+              "point": 1,
+              "reply": "그 정도면 됐어."
+            },
+            {
+              "text": "무조건 리코님한테만 팔게요!",
+              "point": 0,
+              "reply": "그건 좀 부담스럽거나 수상한데?"
+            }
+          ]
+        },
+        {
+          "buyer": "아 근데 하나는 반짝이가 좀 떨어져 보인다?",
+          "options": [
+            {
+              "text": "그 정도는 그냥 넘어가요.",
+              "point": 0,
+              "reply": "아니, 그걸 왜 숨겨?"
+            },
+            {
+              "text": "안 떨어졌는데요?",
+              "point": 0,
+              "reply": "아니, 그걸 왜 숨겨?"
+            },
+            {
+              "text": "맞아요. 끝부분이 조금 벗겨져서 사진에 표시해둘게요.",
+              "point": 1,
+              "reply": "오케이, 그럼 알고 살게."
+            }
+          ]
+        },
+        {
+          "buyer": "그럼 4천5백 원?",
+          "options": [
+            {
+              "text": "네, 세트 가격 4,500원입니다.",
+              "point": 1,
+              "reply": "가격 확정."
+            },
+            {
+              "text": "갑자기 6천 원 받고 싶어졌어요.",
+              "point": 0,
+              "reply": "가격이 왜 계속 달라져."
+            },
+            {
+              "text": "그냥 얼마 줄래요?",
+              "point": 0,
+              "reply": "가격이 왜 계속 달라져."
+            }
+          ]
+        },
+        {
+          "buyer": "나 에둘러 말하는 거 싫어하는데, 하자 더 없어?",
+          "options": [
+            {
+              "text": "그냥 믿고 사시면 안 돼요?",
+              "point": 0,
+              "reply": "장난하냐? 이러면 못 사지."
+            },
+            {
+              "text": "확인한 하자는 방금 말한 부분뿐이에요.",
+              "point": 1,
+              "reply": "좋아, 설명 깔끔하네."
+            },
+            {
+              "text": "귀찮게 계속 물으시네요.",
+              "point": 0,
+              "reply": "장난하냐? 이러면 못 사지."
+            }
+          ]
+        },
+        {
+          "buyer": "주말 오후 2시 돼?",
+          "options": [
+            {
+              "text": "무조건 제가 정한 시간만요.",
+              "point": 0,
+              "reply": "그럼 정하기 어렵네."
+            },
+            {
+              "text": "아마 되겠죠?",
+              "point": 0,
+              "reply": "그럼 정하기 어렵네."
+            },
+            {
+              "text": "네, 토요일 오후 2시 가능합니다.",
+              "point": 1,
+              "reply": "일정 맞네."
+            }
+          ]
+        },
+        {
+          "buyer": "어디서 만날 건데.",
+          "options": [
+            {
+              "text": "사람 많은 역 출구 앞에서 만나는 건 어떠세요?",
+              "point": 1,
+              "reply": "거기가 편하겠다."
+            },
+            {
+              "text": "밤에 골목에서 보죠.",
+              "point": 0,
+              "reply": "그런 곳은 좀 싫은데."
+            },
+            {
+              "text": "제 집 주소 알려드릴게요.",
+              "point": 0,
+              "reply": "그런 곳은 좀 싫은데."
+            }
+          ]
+        },
+        {
+          "buyer": "마지막 질문. 포장 없어도 괜찮지?",
+          "options": [
+            {
+              "text": "상자 값 더 내세요.",
+              "point": 0,
+              "reply": "에휴… 굳이 살 필요 없겠다."
+            },
+            {
+              "text": "네, 다만 긁히지 않도록 작은 지퍼백에 담아둘게요.",
+              "point": 1,
+              "reply": "오, 센스 있네. 거래하자."
+            },
+            {
+              "text": "포장 같은 건 기대하지 마세요.",
+              "point": 0,
+              "reply": "에휴… 굳이 살 필요 없겠다."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "romi",
+      "name": "로미",
+      "nick": "별점은신중히",
+      "hint": "작은 정보가 조금만 달라도 신뢰를 잃는 유형이야. 물건의 흠집, 가격, 구성과 거래 조건을 끝까지 같은 기준으로 설명해 봐. 장담할 수 없는 건 단정하지 않는 게 좋아.",
+      "accent": "#dedbfa",
+      "hair": "#9181af",
+      "hairStyle": "bob",
+      "face": "🎼",
+      "endOk": "좋아요. 설명이 처음부터 끝까지 일관됐네요. 구매하겠습니다.",
+      "endNo": "죄송하지만 이번 거래는 진행하지 않겠습니다.",
+      "itemId": "cd",
+      "difficulty": "극악",
+      "summary": "[임시 설정] 예민할 만큼 꼼꼼하고 우아하지만, 일정과 설명의 모순에 민감함.",
+      "profile": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj4KICAgIDxkZWZzPjxyYWRpYWxHcmFkaWVudCBpZD0iYmciPjxzdG9wIHN0b3AtY29sb3I9IiNmZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNkZWRiZmEiLz48L3JhZGlhbEdyYWRpZW50PjxjbGlwUGF0aCBpZD0iY2xpcCI+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iODgiLz48L2NsaXBQYXRoPjwvZGVmcz4KICAgIDxjaXJjbGUgY3g9IjkwIiBjeT0iOTAiIHI9Ijg4IiBmaWxsPSJ1cmwoI2JnKSIvPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwKSI+CiAgICA8Y2lyY2xlIGN4PSIyOCIgY3k9IjMwIiByPSIyOCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjM3Ii8+PGNpcmNsZSBjeD0iMTYyIiBjeT0iMTMyIiByPSI0MiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjIzIi8+CiAgICA8cGF0aCBkPSJNMTUgMTgyIFExNSAxMTggODQgMTIwIEwxMDIgMTIwIFExNjUgMTIwIDE2OSAxODIiIGZpbGw9IiM5MTgxYWYiIG9wYWNpdHk9Ii44Ii8+CiAgICA8cmVjdCB4PSI3NiIgeT0iMTExIiB3aWR0aD0iMjkiIGhlaWdodD0iMjQiIHJ4PSI5IiBmaWxsPSIjZWRjNmFjIi8+CiAgICA8ZWxsaXBzZSBjeD0iOTAiIGN5PSI4OSIgcng9IjQ4IiByeT0iNTMiIGZpbGw9IiNmNmQ1YmIiLz4KICAgIDxlbGxpcHNlIGN4PSI0MyIgY3k9Ijk1IiByeD0iNyIgcnk9IjEyIiBmaWxsPSIjZWRjNmFjIi8+PGVsbGlwc2UgY3g9IjEzNiIgY3k9Ijk1IiByeD0iNyIgcnk9IjEyIiBmaWxsPSIjZWRjNmFjIi8+CiAgICA8cGF0aCBkPSJNNDMgOTAgUTM3IDMzIDk1IDMyIFExNTMgMzggMTQzIDk0IEwxNDcgMTM5IEwzOCAxMzlaIiBmaWxsPSIjOTE4MWFmIi8+PHBhdGggZD0iTTQ0IDg1IFE2MSA3MyA4MCA0OSBRMTE1IDc0IDE0MSA4NloiIGZpbGw9IiM5MTgxYWYiLz4KICAgIDxwYXRoIGQ9Ik02OSA5OCBxOSAtNiAxNyAwIiBmaWxsPSJub25lIiBzdHJva2U9IiM1MzUwNWIiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNOTkgOTggcTkgLTYgMTcgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNTM1MDViIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTg4IDExMiBxNCA0IDggMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjc2Yzc5IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPGNpcmNsZSBjeD0iNTkiIGN5PSIxMTEiIHI9IjciIGZpbGw9IiNlZDllYWEiIG9wYWNpdHk9Ii4yNyIvPjxjaXJjbGUgY3g9IjEyMSIgY3k9IjExMSIgcj0iNyIgZmlsbD0iI2VkOWVhYSIgb3BhY2l0eT0iLjI3Ii8+CiAgICA8L2c+PGNpcmNsZSBjeD0iOTAiIGN5PSI5MCIgcj0iODciIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii45IiBzdHJva2Utd2lkdGg9IjQiLz4KICAgIDxjaXJjbGUgY3g9IjE0NSIgY3k9IjEzOSIgcj0iMjciIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii45NCIvPjx0ZXh0IHg9IjE0NSIgeT0iMTQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI2Ij7wn468PC90ZXh0Pjwvc3ZnPg==",
+      "steps": [
+        {
+          "buyer": "안녕하세요. OST CD 판매글을 읽고 연락드렸어요.",
+          "options": [
+            {
+              "text": "안녕하세요. 설명은 모두 게시글에 적어뒀는데 더 궁금한 게 있나요?",
+              "point": 0,
+              "reply": "첫 답변이 조금 당황스럽네요."
+            },
+            {
+              "text": "읽어주셔서 감사해요. 혹시 지금 바로 구매 결정 가능하실까요?",
+              "point": 0,
+              "reply": "첫 답변이 조금 당황스럽네요."
+            },
+            {
+              "text": "안녕하세요. 문의하실 내용 편하게 말씀해 주세요.",
+              "point": 1,
+              "reply": "감사합니다."
+            }
+          ]
+        },
+        {
+          "buyer": "한정판이라고 쓰셨는데 특전까지 포함인가요?",
+          "options": [
+            {
+              "text": "CD와 소책자만 포함이고, 특전 카드는 없어요.",
+              "point": 1,
+              "reply": "구성을 명확하게 알았어요."
+            },
+            {
+              "text": "한정판은 맞는데 특전 카드는 없는 것 같아요.",
+              "point": 0,
+              "reply": "구성 정보가 불안하네요."
+            },
+            {
+              "text": "CD와 소책자는 있는데 특전은 제가 확인해볼게요.",
+              "point": 0,
+              "reply": "구성 정보가 불안하네요."
+            }
+          ]
+        },
+        {
+          "buyer": "사진에는 비닐이 없는데 미개봉인가요?",
+          "options": [
+            {
+              "text": "비닐만 없을 뿐 거의 미사용 상품으로 보셔도 될 것 같아요.",
+              "point": 0,
+              "reply": "그 표현은 정확하지 않아요."
+            },
+            {
+              "text": "아니요, 개봉품이고 2회 재생했습니다.",
+              "point": 1,
+              "reply": "네, 정확한 표현이네요."
+            },
+            {
+              "text": "CD 상태가 새것 같아서 개봉 여부는 크게 중요하지 않을 거예요.",
+              "point": 0,
+              "reply": "그 표현은 정확하지 않아요."
+            }
+          ]
+        },
+        {
+          "buyer": "디스크 표면에 미세한 흠집도 없습니까?",
+          "options": [
+            {
+              "text": "제가 볼 땐 흠집이 하나도 없었어요. 거의 완벽한 편입니다.",
+              "point": 0,
+              "reply": "그렇게 단정하시는 게 오히려 걱정돼요."
+            },
+            {
+              "text": "보이는 부분만 보면 매우 깨끗해요. 걱정 안 하셔도 돼요.",
+              "point": 0,
+              "reply": "그렇게 단정하시는 게 오히려 걱정돼요."
+            },
+            {
+              "text": "육안으로 확인한 흠집은 없지만, 사용품이라 완벽하다고 보장하긴 어려워요.",
+              "point": 1,
+              "reply": "그 정도 설명이면 납득해요."
+            }
+          ]
+        },
+        {
+          "buyer": "재생 오류가 없는지 시험하셨나요?",
+          "options": [
+            {
+              "text": "제가 재생한 구간에서는 오류가 없었어요. 전체 검사는 하지 않았습니다.",
+              "point": 1,
+              "reply": "확인 범위를 알려주셔서 좋아요."
+            },
+            {
+              "text": "제 기기에서 들을 땐 잘 나왔어요. 아마 다른 기기도 같겠죠.",
+              "point": 0,
+              "reply": "검증 범위를 알고 싶었던 거예요."
+            },
+            {
+              "text": "들었던 곡들은 잘 나왔으니 전체도 괜찮을 것 같아요.",
+              "point": 0,
+              "reply": "검증 범위를 알고 싶었던 거예요."
+            }
+          ]
+        },
+        {
+          "buyer": "가격이 22,000원인데 구성 누락을 고려한 가격인가요?",
+          "options": [
+            {
+              "text": "한정판인 걸 감안하면 시세보다 저렴한 편이에요.",
+              "point": 0,
+              "reply": "가격 기준을 모르겠어요."
+            },
+            {
+              "text": "네, 특전 미포함과 개봉 상태를 반영한 가격입니다.",
+              "point": 1,
+              "reply": "합리적이네요."
+            },
+            {
+              "text": "소책자도 있고 상태도 좋아서 적당한 가격이라고 생각해요.",
+              "point": 0,
+              "reply": "가격 기준을 모르겠어요."
+            }
+          ]
+        },
+        {
+          "buyer": "제가 혹시 구매하지 않으면 기분이 나쁘실까요?",
+          "options": [
+            {
+              "text": "괜찮아요. 다만 오늘 안에는 답을 주시면 좋겠어요.",
+              "point": 0,
+              "reply": "조금 압박처럼 느껴지네요."
+            },
+            {
+              "text": "괜찮긴 한데 다른 분이 먼저 사겠다고 하면 어쩔 수 없어서요.",
+              "point": 0,
+              "reply": "조금 압박처럼 느껴지네요."
+            },
+            {
+              "text": "아니요. 궁금한 점 확인하시고 편하게 결정하시면 됩니다.",
+              "point": 1,
+              "reply": "배려해 주셔서 감사해요."
+            }
+          ]
+        },
+        {
+          "buyer": "사람이 많은 곳에서 상태를 확인할 시간이 있을까요?",
+          "options": [
+            {
+              "text": "네, 도서관 로비 앞에서 잠깐 확인하셔도 괜찮아요.",
+              "point": 1,
+              "reply": "그렇다면 편하겠어요."
+            },
+            {
+              "text": "확인은 가능해요. 다만 예약하시면 취소는 안 해주셨으면 해요.",
+              "point": 0,
+              "reply": "그 방법은 불편합니다."
+            },
+            {
+              "text": "사람이 많을 테니 포장만 간단히 확인해주시면 될까요?",
+              "point": 0,
+              "reply": "그 방법은 불편합니다."
+            }
+          ]
+        },
+        {
+          "buyer": "금요일 5시라고 하셨죠. 저는 5시 10분이 좋아요.",
+          "options": [
+            {
+              "text": "네, 금요일 5시부터 5시 10분 사이로 생각할게요.",
+              "point": 0,
+              "reply": "시간이 서로 다른 것 같은데요."
+            },
+            {
+              "text": "네, 금요일 5시 10분으로 확정할까요?",
+              "point": 1,
+              "reply": "네, 5시 10분으로 부탁드려요."
+            },
+            {
+              "text": "5시 10분쯤이면 될 것 같아요. 변동되면 알려드릴게요.",
+              "point": 0,
+              "reply": "시간이 서로 다른 것 같은데요."
+            }
+          ]
+        },
+        {
+          "buyer": "최종 확인할게요. 개봉 CD·소책자, 특전 없음, 22,000원. 맞나요?",
+          "options": [
+            {
+              "text": "맞아요. 특전 카드는 집에 있을지도 몰라서 확인해볼게요.",
+              "point": 0,
+              "reply": "아까 말씀하신 내용과 다르네요."
+            },
+            {
+              "text": "맞습니다. 가격은 물건 보실 때 다시 조정할 수도 있어요.",
+              "point": 0,
+              "reply": "아까 말씀하신 내용과 다르네요."
+            },
+            {
+              "text": "네, 모두 맞습니다. 금요일 5시 10분에 뵐게요.",
+              "point": 1,
+              "reply": "좋습니다. 구매하겠습니다."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "waveLabels": [
+    "처음 두 사람 · 쉬움",
+    "조금 다른 사람들 · 보통",
+    "상대의 기준 · 어려움",
+    "마지막 시험 · 극악"
+  ],
+  "settings": {
+    "scorePerBuyer": 6,
+    "neededWins": 6,
+    "hints": 3
+  }
+};
+
+</script>
+<script>
+(()=>{'use strict';
+const DATA=window.SIM_DATA;
+if(!DATA){document.getElementById('screen').textContent='game-data.js를 불러오지 못했어요.';return;}
+const $=(id)=>document.getElementById(id);
+const KEY='nayuta-carrot-sim-v2';
+const PREVIOUS_KEY='nayuta-carrot-sim-v1';
+const starter=()=>({screen:'lock',introSeen:false,posted:false,itemReturn:'carrot',tab:'home',activeItem:null,activeBuyer:null,level:0,threads:{},seenThreads:[],hintIds:[],hintNotes:[],hintFrom:null,overrides:{},showToastOnce:false});
+let s=starter();
+try{
+ const raw=localStorage.getItem(KEY);
+ if(raw){s={...s,...JSON.parse(raw)};if(!s.threads)s.threads={};if(!s.overrides)s.overrides={};if(!s.hintIds)s.hintIds=[];if(!s.hintNotes)s.hintNotes=[];}
+ else { // Old progress cannot match new rounds; preserve only edited profile/item photos.
+   const prior=JSON.parse(localStorage.getItem(PREVIOUS_KEY)||'null');
+   if(prior && prior.overrides && typeof prior.overrides==='object') s.overrides=prior.overrides;
+ }
+}catch(e){console.warn('저장된 데이터를 열 수 없습니다',e)}
+let toastTimer=null;
+const esc=(v)=>String(v??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const money=n=>Number(n).toLocaleString('ko-KR')+'원';
+const getItem=id=>DATA.items.find(x=>x.id===id);
+const getBuyer=id=>DATA.buyers.find(x=>x.id===id);
+const imageFor=(obj)=>s.overrides[(obj.profile?'profile:':'item:')+obj.id]||(obj.profile||obj.photo);
+const ordered=()=>DATA.buyers.filter((b,i)=>i<=s.level*2+1 && s.posted);
+const wins=()=>Object.values(s.threads).filter(t=>t.finished&&t.success).length;
+const completed=()=>Object.values(s.threads).filter(t=>t.finished).length;
+const leftHints=()=>DATA.settings.hints-s.hintIds.length;
+const stageComplete=()=>s.posted&&DATA.buyers.slice(s.level*2,s.level*2+2).every(b=>s.threads[b.id]?.finished);
+const fullComplete=()=>completed()===DATA.buyers.length;
+const unreads=()=>ordered().filter(b=>!s.seenThreads.includes(b.id)&&!s.threads[b.id]?.finished).length;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){console.warn('저장 공간이 부족합니다',e)}}
+function notify(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2900)}
+function statusBar(){const dark=['lock','home'].includes(s.screen);$('status-bar').className='status-bar'+(dark?' dark':'');$('status-bar').innerHTML='<span class="status-time">9:41</span><span class="dynamic-island"></span><span class="status-signals">▂▅▇ ᯤ <span class="battery">100</span></span>';$('home-bar').className='home-indicator'+(dark?' light':'')}
+function lock(){let now=new Date();return `<div class="ios-wallpaper"><div class="lock-content"><div class="lock-label">${now.toLocaleDateString('ko-KR',{month:'long',day:'numeric',weekday:'long'})}</div><div class="lock-clock">9:41</div></div><button type="button" class="lock-note" data-act="unlock"><span class="lock-noticon">💬</span><span><b>카카오톡 · 수 <span style="float:right;font-size:10px;color:#5c7080">지금</span></b><small>유타야, 잠깐 시간 있어?<br>생각해둔 게 있는데…</small></span></button><div class="lock-footer"><span>⌃</span><button class="lock-unlock" data-act="unlock">위로 쓸어올려 잠금 해제</button></div></div>`}
+function appTile(key,symbol,name,cls='',badge=false){return `<button class="app-tile" data-act="launch:${key}" aria-label="${esc(name)} 열기"><span class="app-icon ${cls}">${symbol}${badge?'<i class="notif">'+(unreads()||1)+'</i>':''}</span><span>${esc(name)}</span></button>`}
+function home(){let now=new Date();return `<div class="ios-wallpaper home-screen"><div class="ios-home-widgets"><div class="home-widget"><small>${now.toLocaleDateString('ko-KR',{month:'long',weekday:'long'})}</small><div class="day">${now.getDate()}</div><div class="muted">일정 없음</div></div><div class="home-widget weather-widget"><small>날씨</small><div class="cloud">☁️</div><div class="dash">--°</div><div class="muted">날씨 데이터 없음</div></div></div><div class="app-grid">${appTile('gallery','🌈','사진','photos')}${appTile('calendar','📅','캘린더','calendar')}${appTile('notes','🗒️','메모','notes')}${appTile('clock','🕓','시계','clock')}${appTile('weather','🌤️','날씨','')}${appTile('settings','⚙️','설정','settings')}${appTile('carrot','🥕','당근','carrot',s.posted)}${appTile('kakao','💬','카카오톡','kakao')}</div><div class="ios-pages">● ○</div><div class="ios-search">⌕ 검색</div><div class="ios-dock">${appTile('phone','☎','전화','phone')}${appTile('messages','💬','메시지','messages')}${appTile('kakao','💬','카카오톡','kakao')}${appTile('carrot','🥕','당근','carrot')}</div></div>`}
+function backBtn(act){return `<button class="icon-btn" data-act="${esc(act)}" aria-label="뒤로 가기">‹</button>`}
+function kakao(){let msgs=[...DATA.intro];for(const note of s.hintNotes){msgs.push({from:'yuta',text:note.ask});msgs.push({from:'su',text:note.answer});}let lastHint=s.hintNotes[s.hintNotes.length-1];return `<div class="kakao-screen"><div class="kk-top"><div class="kk-top-left">${backBtn('home')}<strong>수 🐬</strong></div><span class="icon-btn">☰</span></div><div class="kk-timeline" id="kakao-scroller"><div class="kk-date">오늘 · 유타와 수의 대화</div>${msgs.map((m,i)=>`<div class="kk-msg ${m.from==='yuta'?'me':'other'}">${m.from==='su'?'<span class="kk-avatar">🐬</span>':''}<div class="kk-bubble">${esc(m.text)}</div><span class="kk-time">${timeOf(i)}</span></div>`).join('')}</div><div class="kk-actions">${s.hintFrom?`<div class="tip">🐬 수의 조언을 읽었어요 · 남은 도움 ${leftHints()}회</div><button class="primary-action" data-act="return-thread">당근 채팅으로 돌아가기</button>`:`<div class="tip">${s.posted?'도움이 필요할 때 채팅방의 🐬🔎를 눌러 보세요.':'수의 말대로 당근에 물건을 올려 보자.'}</div><button class="primary-action" data-act="carrot">🥕 당근 열기</button>`}</div></div>`}
+function timeOf(i){return '09:'+String(41+Math.floor(i/3)).padStart(2,'0')}
+function header(title,back='',right=''){return `<div class="app-header"><div class="head-left">${back?backBtn(back):''}<h2>${title}</h2></div><div class="head-right">${right}</div></div>`}
+function nav(){return `<nav class="nav-tabs">${[['home','⌂','홈'],['chats','▤','채팅'],['mine','♙','나의 당근']].map(([id,sym,name])=>`<button class="nav-tab ${s.tab===id?'selected':''}" data-act="tab:${id}"><span class="nav-symbol">${sym}${id==='chats'&&unreads()?`<i class="count">${unreads()}</i>`:''}</span><span>${name}</span></button>`).join('')}</nav>`}
+function listingRow(item){let b=DATA.buyers.find(x=>x.itemId===item.id);let t=s.threads[b?.id];return `<button class="feed-item" data-act="item:${esc(item.id)}"><img src="${esc(imageFor(item))}" alt="${esc(item.title)} 사진"><div class="description"><b>${esc(item.title)}</b><small>우리 동네 · 방금 전</small><strong>${money(item.price)}</strong>${t?.finished?`<span class="status-tag ${t.success?'sold':'waiting'}">${t.success?'거래완료':'판매중'}</span>`:''}<span class="tiny-activity">♡ ${1+DATA.items.indexOf(item)}　☏ ${t?1:0}</span></div></button>`}
+function feed(){return s.posted?`<div class="feed-intro">나유타의 판매 물건 · 총 ${DATA.items.length}개</div><div class="feed-items">${DATA.items.map(listingRow).join('')}</div>`:`<div class="empty-start"><span class="illustration">📦</span><h2>서랍에 잠든 물건들</h2><p>수는 먼저 글부터 올려보라고 했다.<br>내 방에 물건이 이렇게 많았던가…<br><br>글쓰기를 눌러 8개의 판매글을<br>자동으로 작성해 보자.</p><button class="primary-action" data-act="compose">+ 내 물건 팔기</button></div>`}
+function chats(){if(!s.posted)return `<div class="empty-start"><span class="illustration">💬</span><h2>아직 채팅이 없어요</h2><p>판매글을 올리면 구매 희망자들이<br>연락을 보낼지도 몰라요.</p><button class="primary-action" data-act="compose">판매글 쓰기</button></div>`;return `<div style="padding:13px 16px;font-size:11px;color:#8b9097;border-bottom:1px solid #f3f3f3">${esc(DATA.waveLabels[s.level])} · 완료 ${completed()} / 8 · 성공 ${wins()}</div>${ordered().map(b=>{let t=s.threads[b.id];let item=getItem(b.itemId);let msg=t?.messages.at(-1)?.text||b.steps[0].buyer;return `<button class="chat-list-row" data-act="thread:${b.id}"><img class="avatar" src="${esc(imageFor(b))}" alt="${esc(b.nick)} 프로필"><div class="left"><div class="rowhead"><b>${esc(b.nick)}</b><small>우리 동네</small>${t.finished?`<span class="status-tag ${t.success?'sold':''}">${t.success?'완료':'종료'}</span>`:''}</div><div class="preview">${esc(msg)}</div></div>${!s.seenThreads.includes(b.id)&&!t.finished?'<span class="unread">1</span>':''}<img class="product-thumb" src="${esc(imageFor(item))}" alt=""></button>`}).join('')}${stageComplete()?`<div style="padding:18px"><button class="primary-action" data-act="stage">${fullComplete()?'최종 결과 보기':'이번 두 사람 결과 보기'}</button></div>`:''}`}
+function mine(){return `<div class="my-section"><div class="my-profile"><span class="avatar">🍁</span><div><b>${esc(DATA.ownerNick)}</b><p>나유타 · 우리 동네<br>처음 해보는 직거래… 괜찮을까?</p></div></div><div class="my-stats"><div><strong>${s.posted?8:0}</strong><small>등록한 물건</small></div><div><strong>${completed()}</strong><small>시도한 거래</small></div><div><strong>${wins()}</strong><small>거래 성공</small></div><div><strong>${leftHints()}</strong><small>남은 수의 도움</small></div></div></div><div class="my-menu"><button data-act="editor">🖼️ 프로필·물품 사진 바꾸기 <span>›</span></button><button data-act="kakao">🐬 수와의 카톡 다시 보기 <span>›</span></button>${stageComplete()?'<button data-act="stage">📊 현재 결과 확인 <span>›</span></button>':''}<button data-act="restart">↻ 게임 처음부터 다시 시작 <span>›</span></button></div><div class="editor-hint">이 앱은 가상 캐릭터 시뮬레이터입니다. 실제 당근 거래나 사용자와 연결되지 않아요.</div>`}
+function carrot(){let body=s.tab==='chats'?chats():s.tab==='mine'?mine():feed();return `<div class="app-screen">${s.tab==='home'?header('우리 동네','',`<button class="icon-btn" data-act="compose" aria-label="새 글 작성">＋</button>`):header(s.tab==='chats'?'채팅':'나의 당근','',`<span class="tiny-capsule">🥕 유타</span>`)}<div class="app-body">${body}</div>${nav()}${s.tab==='home'&&!s.posted?'<button class="fab" data-act="compose">＋ 글쓰기</button>':s.tab==='home'?'<button class="fab" data-act="compose">＋ 글쓰기</button>':''}</div>`}
+function compose(){return `<div class="app-screen">${header('내 물건 팔기','carrot')}<div class="app-body"><div class="compose-headline"><div class="tiny-capsule" style="display:inline-block">✨ 자동으로 채워진 초안</div><h2>8개 판매글이 준비됐어요</h2><p>유타의 방을 정리하며 찾은 물건들.<br>제목·가격·상세 설명까지 작성해 두었어요.</p></div>${DATA.items.map(item=>`<div class="compose-card"><img src="${esc(imageFor(item))}" alt="${esc(item.title)}"><div class="info"><b>${esc(item.title)}</b><small>${esc(item.category)}　·　${money(item.price)}</small><p>${esc(item.description)}</p></div></div>`).join('')}</div><div class="compose-footer"><button class="primary-action" data-act="publish" ${s.posted?'disabled':''}>${s.posted?'이미 8개를 게시했어요':'🥕 판매글 8개 모두 게시하기'}</button></div></div>`}
+function itemPage(){const it=getItem(s.activeItem);if(!it)return carrot();const b=DATA.buyers.find(x=>x.itemId===it.id);const t=s.threads[b.id];return `<div class="app-screen">${header('중고거래','back-item',`<span class="tiny-capsule">내 판매글</span>`)}<div class="app-body"><img class="listing-large" src="${esc(imageFor(it))}" alt="${esc(it.title)}"><div class="listing-info"><div class="seller"><span class="seller-avatar">🍁</span><div><b>${esc(DATA.ownerNick)}</b><small>우리 동네 · 매너온도 36.5°C</small></div></div><h2>${esc(it.title)}</h2><div class="listing-meta">${esc(it.category)} · 방금 전</div><p>${esc(it.description)}</p><div style="height:20px"></div></div></div><div class="listing-footer"><div class="price"><strong>${money(it.price)}</strong><small>${t?.success?'거래완료':s.posted?'판매중':'작성 중'}</small></div><button class="primary-action" data-act="${t?'thread:'+b.id:'carrot-chats'}">${t?'관련 채팅 보기':'채팅 목록 보기'}</button></div></div>`}
+function threadStart(id){const b=getBuyer(id);if(!b)return;if(!s.threads[id])s.threads[id]={index:0,score:0,messages:[{from:'buyer',text:b.steps[0].buyer}],finished:false,success:false};}
+function threadPage(){let b=getBuyer(s.activeBuyer);if(!b)return carrot();let item=getItem(b.itemId);let t=s.threads[b.id];if(!t){threadStart(b.id);t=s.threads[b.id]}
+let history=t.messages.map((m,i)=>`<div class="chat-bub-row ${m.from==='buyer'?'buyer':'me'}">${m.from==='buyer'?`<img class="avatar" src="${esc(imageFor(b))}" alt="">`:''}<div class="chat-bubble">${esc(m.text)}</div><span class="chat-time">${chatTime(i)}</span></div>`).join('');let activeStep=b.steps[t.index];let choicePanel=t.finished?`<div class="chat-result"><div class="result-line">${t.success?'🎉 거래 성사':'🌥️ 거래 불발'}　<strong>${t.score} / 10점</strong> · 기준 ${DATA.settings.scorePerBuyer}점</div><button class="primary-action" data-act="thread-close">${stageComplete()?'이번 두 사람 결과 보기':'채팅 목록으로'}</button></div>`:`<div class="chat-choices"><div class="choice-label"><span>유타의 답장을 골라 주세요</span><span>${t.index+1} / 10번째 선택</span></div>${activeStep.options.map((o,k)=>`<button class="choice-btn" data-act="choice:${b.id}:${k}"><span class="letter">${String.fromCharCode(65+k)}</span><span>${esc(o.text)}</span></button>`).join('')}</div>`;
+return `<div class="chat-screen"><div class="chat-room-head">${backBtn('carrot-chats')}<div class="name"><b>${esc(b.nick)}</b><small>우리 동네 · 이웃과의 대화</small></div><button class="hint-button" data-act="hint:${b.id}" aria-label="수의 조언 받기">🐬🔎<span class="hint-count">${leftHints()}</span></button><button class="icon-btn" data-act="item:${esc(item.id)}" aria-label="상품 보기">⋯</button></div><div class="chat-product"><img src="${esc(imageFor(item))}" alt="${esc(item.title)}"><div><span class="line1"><b>${t.success?'거래완료':'판매중'}</b> · ${esc(item.title)}</span><strong>${money(item.price)}</strong></div><span class="step-count">${String(Math.min(t.index+1,10)).padStart(2,'0')} / 10</span></div><div class="chat-messages" id="chat-scroller"><div class="room-day">오늘 · 우리 동네 이웃과 채팅</div>${history}</div>${choicePanel}</div>`}
+function chatTime(i){return '오후 '+(1+Math.floor(i/19))+':'+String((i*3)%60).padStart(2,'0')}
+function stagePage(){let pair=DATA.buyers.slice(s.level*2,s.level*2+2);let final=fullComplete();let sum=pair.filter(b=>s.threads[b.id]?.success).length;return `<div class="wave-page"><div class="wave-emoji">${final?'🎓':sum===2?'🥕':'📦'}</div><h1>${final?'여덟 번의 대화가 끝났다':`두 사람과의 거래가 끝났다`}</h1><p class="sub">${final?'나유타의 첫 거래 도전, 그 결과는?':`이번 단계 · ${esc(DATA.waveLabels[s.level])}<br>처음에는 답장 버튼 하나 누르기도 긴장됐지만…`}</p>${pair.map(b=>{let t=s.threads[b.id];return `<div class="wave-result-card ${t?.success?'success':'fail'}"><b>${t?.success?'✔ 거래 성공':'✕ 거래 불발'}　${esc(b.nick)}</b><span>신뢰 점수 <b style="display:inline">${t?.score??0} / 10점</b><br>${t?.success?'구매 의사를 받았어요.':'상대가 구매를 보류했어요.'}</span></div>`}).join('')}<div class="wave-spacer"></div><div><p class="sub" style="margin-bottom:12px">누적 성공 ${wins()} / 8 · 목표 ${DATA.settings.neededWins}명</p><div class="progress-track"><i style="width:${wins()/DATA.settings.neededWins*100}%"></i></div></div><button class="primary-action" data-act="${final?'ending':'next-stage'}">${final?'최종 결과 확인하기':'다음 두 사람의 메시지 확인하기 →'}</button><button class="secondary-action" data-act="carrot-chats">채팅 목록으로</button></div>`}
+function endingPage(){let won=wins()>=DATA.settings.neededWins,perfect=wins()===8;let used=s.hintIds.length;return `<div class="wave-page" style="padding-top:73px"><div class="wave-emoji">${won?'🌼':'🌙'}</div><div style="text-align:center;color:#ed811c;font-size:11px;font-weight:780;letter-spacing:2px">${won?'CLEAR':'TRY AGAIN'}</div><h1>${won?(perfect?'모두에게 답장을 보냈다':'조금은 익숙해진 인사'):'내일도 괜찮을 거야'}</h1><p class="sub">${won?'막상 사람들과 대화해 보니, 말 한마디를 고르는 일은 생각보다 어렵고, 또 생각보다 괜찮았다.':'여덟 번 중 마음이 닿지 않은 순간도 있었다. 그래도 유타는 도망치지 않고 끝까지 답장을 보냈다.'}</p><div class="wave-result-card success" style="text-align:center"><b style="font-size:25px;margin-bottom:4px">${wins()} / 8명 성공</b><span>목표: ${DATA.settings.neededWins}명 성공　|　수에게 도움 요청: ${used} / ${DATA.settings.hints}회</span></div><div class="wave-result-card"><b>🐬 수 · 카카오톡</b><span>${won?'봐. 너 생각보다 잘하잖아 ㅎㅎ\n다음엔 나랑 같이 나가볼래?':'안 되는 날도 있는 거지.\n그래도 끝까지 한 거, 나는 되게 멋지다고 생각해.'}</span></div><p class="sub" style="font-size:12px">며칠 뒤, 학교 복도에서 낯익은 물건들이 눈에 들어왔다.<br>하지만 유타는 아직 모른다.<br>채팅창 저편에 있던 사람들도 같은 학교 학생이었다는 걸.</p><details class="spoilers"><summary>🔎 제작자용 · 구매자 정체 보기 (스포일러)</summary>${DATA.buyers.map(b=>`<p>${esc(b.nick)} → ${esc(b.name)} · ${esc(b.difficulty)}</p>`).join('')}</details><div class="wave-spacer"></div><button class="primary-action" data-act="carrot-chats">채팅 기록 다시 보기</button><button class="secondary-action" data-act="restart">처음부터 다시 플레이</button></div>`}
+function editorPage(){let characters=DATA.buyers.map(b=>`<div class="editor-row"><img src="${esc(imageFor(b))}" alt=""><div><b>${esc(b.nick)}</b><small>구매자 프로필 · 사진 변경 가능</small></div><label class="upload-label">사진 교체<input type="file" accept="image/*" data-file="profile:${esc(b.id)}"></label></div>`).join('');let items=DATA.items.map(x=>`<div class="editor-row"><img src="${esc(imageFor(x))}" alt=""><div><b>${esc(x.title)}</b><small>${money(x.price)}</small></div><label class="upload-label">사진 교체<input type="file" accept="image/*" data-file="item:${esc(x.id)}"></label></div>`).join('');return `<div class="app-screen">${header('사진 바꾸기','carrot-mine')}<div class="app-body"><div class="editor-head">사진을 선택하면 이 브라우저의 게임 화면에 즉시 적용돼요. 친구에게 공유할 최종 사진은 ZIP 내부 <b>assets</b> 파일을 교체하거나 <b>game-data.js</b>의 사진 경로를 수정하세요.</div><div class="editor-section"><h3>구매자 프로필 사진 · 8명</h3>${characters}</div><div class="editor-section"><h3>판매 물품 사진 · 8개</h3>${items}</div><div class="editor-hint">지원 파일: JPG, PNG, WEBP 등 · 사진은 자동 축소하여 브라우저에 저장합니다. 브라우저 저장 기록을 삭제하면 교체한 사진도 초기화돼요.</div><div style="padding:0 18px 40px"><button class="secondary-action" data-act="reset-pictures">내가 교체한 사진만 초기화</button></div></div></div>`}
+function render(){const screen=$('screen');const views={lock,home,kakao,carrot,compose,listing:itemPage,thread:threadPage,stage:stagePage,ending:endingPage,editor:editorPage};screen.innerHTML=(views[s.screen]||home)();statusBar();save();requestAnimationFrame(()=>{let target=s.screen==='thread'?'chat-scroller':s.screen==='kakao'?'kakao-scroller':null;if(target){let el=$(target);if(el)el.scrollTop=(s.screen==='kakao'&&!s.posted&&!s.hintNotes.length)?0:el.scrollHeight}})}
+function goHome(){s.screen='home';s.hintFrom=null;render()}
+function openKakao(){s.screen='kakao';render()}
+function openCarrot(tab){s.screen='carrot';s.tab=tab||s.tab||'home';s.hintFrom=null;render()}
+function openThread(id){if(!s.posted)return;let b=getBuyer(id);if(!b||!ordered().some(x=>x.id===id))return;threadStart(id);s.activeBuyer=id;s.screen='thread';if(!s.seenThreads.includes(id))s.seenThreads.push(id);render()}
+function publish(){if(s.posted){notify('이미 판매글 8개를 올렸어요');return}s.posted=true;s.level=0;for(const b of DATA.buyers.slice(0,2))threadStart(b.id);s.tab='chats';s.screen='carrot';render();notify('8개의 판매글을 올렸어요! 새로운 채팅 2건이 도착했어요 🥕')}
+function choose(bid,index){let b=getBuyer(bid),t=s.threads[bid];if(!b||!t||t.finished||s.activeBuyer!==bid)return;let step=b.steps[t.index],opt=step?.options[index];if(!opt)return;t.messages.push({from:'me',text:opt.text});t.score+=Number(opt.point||0);t.index+=1;t.messages.push({from:'buyer',text:opt.reply});if(t.index>=b.steps.length){t.finished=true;t.success=t.score>=DATA.settings.scorePerBuyer;t.messages.push({from:'buyer',text:t.success?b.endOk:b.endNo})}else{t.messages.push({from:'buyer',text:b.steps[t.index].buyer})}render()}
+function hint(id){const b=getBuyer(id),t=s.threads[id];if(!b||!t||t.finished){notify('이미 종료된 거래예요.');return}if(s.hintIds.includes(id)){s.hintFrom=id;s.screen='kakao';render();notify('이 상대에 대한 조언을 다시 볼 수 있어요.');return}if(leftHints()<=0){notify('수에게 도움을 요청할 기회 3번을 모두 썼어요.');return}let ask=`수, 당근에서 '${b.nick}'이라는 사람이랑 대화 중인데…\n${b.summary.replace('[임시 설정] ','')}\n이런 성격인 것 같아. 도대체 어떻게 해야 될까...`;
+s.hintIds.push(id);s.hintNotes.push({buyerId:id,ask,answer:b.hint});s.hintFrom=id;s.screen='kakao';render()}
+function nextStage(){if(!stageComplete()||fullComplete())return;s.level++;for(const b of DATA.buyers.slice(s.level*2,s.level*2+2))threadStart(b.id);s.screen='carrot';s.tab='chats';render();notify('새로운 구매자 2명에게서 메시지가 도착했어요!')}
+function restart(){if(!confirm('현재 거래 기록을 모두 지우고 처음부터 시작할까요? (교체한 사진은 유지돼요)'))return;let overrides={...s.overrides};s=starter();s.overrides=overrides;render();notify('새 게임을 시작했어요')}
+function fileChanged(input){const file=input.files?.[0],key=input.dataset.file;if(!file||!key)return;if(!file.type.startsWith('image/')){notify('이미지 파일을 선택해주세요.');return}if(file.size>12*1024*1024){notify('12MB 이하 이미지를 골라주세요.');return}const fr=new FileReader();fr.onerror=()=>notify('사진을 읽지 못했어요.');fr.onload=()=>{let im=new Image();im.onerror=()=>notify('이미지 형식을 읽을 수 없어요.');im.onload=()=>{let max=key.startsWith('profile:')?400:650,scale=Math.min(1,max/Math.max(im.width,im.height));let cv=document.createElement('canvas');cv.width=Math.max(1,Math.round(im.width*scale));cv.height=Math.max(1,Math.round(im.height*scale));let ctx=cv.getContext('2d');ctx.drawImage(im,0,0,cv.width,cv.height);s.overrides[key]=cv.toDataURL('image/jpeg',.76);try{save()}catch(e){}render();notify('사진을 교체했어요.');};im.src=fr.result;};fr.readAsDataURL(file)}
+document.addEventListener('change',e=>{if(e.target.matches('input[type=file][data-file]'))fileChanged(e.target)});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;const val=b.dataset.act;if(!val)return;
+ if(val==='unlock'){s.introSeen=true;s.screen='kakao';render();return}
+ if(val==='home'){goHome();return}
+ if(val==='kakao'){openKakao();return}
+ if(val==='carrot'){openCarrot('home');return}
+ if(val==='carrot-chats'){openCarrot('chats');return}
+ if(val==='carrot-mine'){openCarrot('mine');return}
+ if(val==='back-item'){if(s.itemReturn==='thread'&&s.activeBuyer){s.screen='thread';render()}else openCarrot('home');return}
+ if(val==='return-thread'){let id=s.hintFrom;s.hintFrom=null;id?openThread(id):openCarrot('chats');return}
+ if(val==='compose'){s.screen='compose';render();return}
+ if(val==='publish'){publish();return}
+ if(val==='stage'){if(stageComplete()){s.screen='stage';render()}return}
+ if(val==='next-stage'){nextStage();return}
+ if(val==='ending'){s.screen='ending';render();return}
+ if(val==='thread-close'){if(stageComplete()){s.screen='stage';render()}else openCarrot('chats');return}
+ if(val==='editor'){s.screen='editor';render();return}
+ if(val==='restart'){restart();return}
+ if(val==='reset-pictures'){if(!confirm('바꿨던 사진을 기본 이미지로 되돌릴까요?'))return;s.overrides={};render();notify('기본 사진으로 되돌렸어요');return}
+ if(val.startsWith('launch:')){let app=val.slice(7);if(app==='kakao')openKakao();else if(app==='carrot')openCarrot('home');else if(app==='settings') {openCarrot('mine');notify('게임 설정은 나의 당근에서 이용할 수 있어요.')} else notify('이번 이야기에서는 카톡과 당근 앱을 사용해요.');return}
+ if(val.startsWith('tab:')){openCarrot(val.slice(4));return}
+ if(val.startsWith('item:')){s.itemReturn=s.screen==='thread'?'thread':'carrot';s.activeItem=val.slice(5);s.screen='listing';render();return}
+ if(val.startsWith('thread:')){openThread(val.slice(7));return}
+ if(val.startsWith('hint:')){hint(val.slice(5));return}
+ if(val.startsWith('choice:')){const [,id,num]=val.split(':');choose(id,Number(num));return}
+});
+// Give the author a safe, read-only quick verification helper in the JS console.
+window.SIM_VERIFY=()=>({buyers:DATA.buyers.length,questions:DATA.buyers.map(b=>[b.nick,b.steps.length]),completed:completed(),wins:wins(),hintsLeft:leftHints()});
+render();
+})();
+
+</script>
+</body>
+</html>
